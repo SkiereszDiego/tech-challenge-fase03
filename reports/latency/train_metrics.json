@@ -1,39 +1,39 @@
 {
-  "train_seconds": 6.169642576000001,
+  "train_seconds": 19.673923045000265,
   "n_train": 11550,
   "n_test": 2888,
-  "accuracy": 0.5287396121883656,
-  "macro_f1": 0.5289426993503572,
-  "weighted_f1": 0.524444292780273,
+  "accuracy": 0.5266620498614959,
+  "macro_f1": 0.526799928075316,
+  "weighted_f1": 0.5222276439344214,
   "per_class": {
     "neoplasms": {
-      "precision": 0.6484018264840182,
-      "recall": 0.6729857819905213,
-      "f1-score": 0.6604651162790698,
+      "precision": 0.6440422322775264,
+      "recall": 0.674565560821485,
+      "f1-score": 0.6589506172839507,
       "support": 633.0
     },
     "digestive system diseases": {
-      "precision": 0.410958904109589,
+      "precision": 0.41208791208791207,
       "recall": 0.5016722408026756,
-      "f1-score": 0.45180722891566266,
+      "f1-score": 0.45248868778280543,
       "support": 299.0
     },
     "nervous system diseases": {
-      "precision": 0.47737556561085975,
-      "recall": 0.548051948051948,
-      "f1-score": 0.5102781136638452,
+      "precision": 0.47477064220183485,
+      "recall": 0.5376623376623376,
+      "f1-score": 0.5042630937880633,
       "support": 385.0
     },
     "cardiovascular diseases": {
-      "precision": 0.5987748851454824,
-      "recall": 0.6409836065573771,
-      "f1-score": 0.6191607284243864,
+      "precision": 0.598159509202454,
+      "recall": 0.639344262295082,
+      "f1-score": 0.618066561014263,
       "support": 610.0
     },
     "general pathological conditions": {
-      "precision": 0.45265888456549935,
-      "recall": 0.3631633714880333,
-      "f1-score": 0.40300230946882215,
+      "precision": 0.4489003880983182,
+      "recall": 0.3610822060353798,
+      "f1-score": 0.4002306805074971,
       "support": 961.0
     }
   }
