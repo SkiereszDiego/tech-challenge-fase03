@@ -50,6 +50,13 @@ jobs:
       - name: Install dependencies
         run: uv sync --frozen
 
+      - name: Train baseline model (needed by /classify tests)
+        run: |
+          curl -sL -o data/raw/medical_tc_train.csv https://raw.githubusercontent.com/sebischair/Medical-Abstracts-TC-Corpus/main/medical_tc_train.csv
+          curl -sL -o data/raw/medical_tc_test.csv https://raw.githubusercontent.com/sebischair/Medical-Abstracts-TC-Corpus/main/medical_tc_test.csv
+          curl -sL -o data/raw/medical_tc_labels.csv https://raw.githubusercontent.com/sebischair/Medical-Abstracts-TC-Corpus/main/medical_tc_labels.csv
+          uv run python -m medical_triage_mlops.ml.train
+
       - name: Run tests
         run: uv run pytest --cov=medical_triage_mlops --cov-report=term-missing
 
