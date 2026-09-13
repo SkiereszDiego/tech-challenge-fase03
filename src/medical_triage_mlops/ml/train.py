@@ -23,6 +23,7 @@ from medical_triage_mlops.ml.dataset import (
 )
 
 MODEL_PATH = Path("models/model.joblib")
+LABELS_PATH = Path("models/labels.json")
 METRICS_PATH = Path("reports/latency/train_metrics.json")
 
 
@@ -90,6 +91,9 @@ def train() -> None:
     MODEL_PATH.parent.mkdir(parents=True, exist_ok=True)
     joblib.dump(pipeline, MODEL_PATH)
     print(f"Modelo salvo em {MODEL_PATH}")
+
+    LABELS_PATH.write_text(json.dumps(label_map, indent=2, ensure_ascii=False))
+    print(f"Mapa de labels salvo em {LABELS_PATH}")
 
     METRICS_PATH.parent.mkdir(parents=True, exist_ok=True)
     METRICS_PATH.write_text(

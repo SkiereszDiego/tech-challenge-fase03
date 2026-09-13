@@ -1,12 +1,14 @@
 """Load the trained pipeline and run predictions on new report text."""
 
+import json
 from functools import lru_cache
 from pathlib import Path
 
 import joblib
 
 from medical_triage_mlops.core.config import get_settings
-from medical_triage_mlops.ml.dataset import load_label_map
+
+LABELS_ARTIFACT_PATH = Path("models/labels.json")
 
 
 class ModelNotFoundError(RuntimeError):
@@ -26,7 +28,19 @@ def _load_pipeline(model_path: str):
 
 @lru_cache
 def _load_labels() -> dict[int, str]:
-    return load_label_map()
+    """Load the class-id -> label-name map saved alongside the model.
+
+    This reads the small `models/labels.json` artifact produced at train
+    time, instead of the raw training CSV — the raw dataset is not shipped
+    to production, only the trained model artifacts are.
+    """
+    if not LABELS_ARTIFACT_PATH.exists():
+        raise ModelNotFoundError(
+            f"Mapa de labels não encontrado em '{LABELS_ARTIFACT_PATH}'. "
+            "Rode 'uv run python -m medical_triage_mlops.ml.train' primeiro."
+        )
+    raw = json.loads(LABELS_ARTIFACT_PATH.read_text())
+    return {int(k): v for k, v in raw.items()}
 
 
 def classify_report(text: str) -> dict:
