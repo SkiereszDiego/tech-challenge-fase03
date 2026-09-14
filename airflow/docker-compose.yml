@@ -1,0 +1,17 @@
+services:
+  airflow:
+    build: .
+    container_name: medical-triage-airflow
+    command: standalone
+    ports:
+      - "8080:8080"
+    environment:
+      - AIRFLOW__CORE__LOAD_EXAMPLES=false
+      - AIRFLOW__CORE__DAGS_FOLDER=/opt/airflow/dags
+      - PYTHONPATH=/opt/airflow/project/src
+    volumes:
+      - .:/opt/airflow
+      - ../src:/opt/airflow/project/src:ro
+      - ../data:/opt/airflow/project/data
+      - ../models:/opt/airflow/project/models
+    restart: unless-stopped

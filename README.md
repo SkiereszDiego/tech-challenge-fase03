@@ -46,9 +46,13 @@ O objetivo é disponibilizar um modelo de classificação de textos médicos por
 tech-challenge-fase03/
 ├── .github/
 │   └── workflows/
+│       └── ci.yml
 ├── airflow/
 │   ├── dags/
-│   └── logs/
+│   │   └── medical_triage_training_dag.py
+│   ├── Dockerfile
+│   ├── docker-compose.yml
+│   └── requirements.txt
 ├── data/
 │   ├── processed/
 │   └── raw/
@@ -255,6 +259,31 @@ time curl -s -X POST http://localhost:8000/classify \
   -d '{"text": "Patient with acute chest pain and shortness of breath."}'
 ```
 
+## Orquestração com Airflow
+
+O Airflow roda em um Docker Compose isolado, em `airflow/`, para não misturar suas dependências com o ambiente `uv` da API:
+
+```bash
+docker compose -f airflow/docker-compose.yml up --build
+```
+
+Acesse a UI em `http://localhost:8080` (usuário/senha são impressos no log do container, modo *standalone*, ou em `airflow/standalone_admin_password.txt`).
+
+A DAG `medical_triage_training` (`airflow/dags/medical_triage_training_dag.py`) executa 3 tasks em sequência, reutilizando as mesmas funções de `src/medical_triage_mlops/ml/`:
+
+```text
+ingest_data → preprocess_data → train_model
+```
+
+Dispare a DAG manualmente pela UI (ou `airflow dags trigger medical_triage_training` dentro do container) para gerar/atualizar `models/model.joblib`.
+
+## CI/CD (GitHub Actions)
+
+O workflow `.github/workflows/ci.yml` roda em todo push/PR para `main` e `develop`:
+
+1. **lint-and-test**: `uv sync` → `ruff check` → `ruff format --check` → `pytest --cov` (sem acesso à rede — os testes usam dados sintéticos, não o dataset real do Kaggle).
+2. **build**: build da imagem Docker da API (`docker build .`), condicionado ao sucesso do job anterior.
+
 ## Qualidade de código
 
 O projeto utiliza Ruff para lint e formatação, além do Pytest para os testes automatizados.
@@ -396,11 +425,11 @@ Essa escolha prioriza serviços gerenciados (menos operação); as próximas eta
 - [x] Endpoint de classificação (`POST /classify`)
 - [x] Dockerfile da API + medição de latência baseline
 - [x] Documentação da decisão de arquitetura em nuvem (real-time vs. batch, AWS)
+- [x] Configurar o GitHub Actions (lint → test → build)
+- [x] Criar a DAG de treinamento no Airflow (ingestão → pré-processamento → treino)
 
 ### Próximos passos
 
-- [ ] Configurar o GitHub Actions
-- [ ] Criar a DAG de treinamento no Airflow
 - [ ] Adicionar métricas do Prometheus
 - [ ] Configurar o dashboard do Grafana
 - [ ] Converter o modelo para ONNX
