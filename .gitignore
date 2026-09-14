@@ -216,3 +216,48 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Test and quality caches
+.pytest_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Project data
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Generated models
+models/*
+!models/.gitkeep
+
+# Airflow runtime
+airflow/logs/
+airflow/airflow.cfg
+airflow/airflow.db
+airflow/airflow-webserver.pid
+airflow/standalone_admin_password.txt
+airflow/webserver_config.py
+
+# Monitoring runtime data
+prometheus-data/
+grafana-data/
+
+# Logs and temporary files
+*.log
+*.tmp
+tmp/
+temp/
+
+# Operating system
+.DS_Store
+Thumbs.db
+desktop.ini
