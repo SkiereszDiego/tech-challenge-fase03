@@ -62,8 +62,12 @@ tech-challenge-fase03/
 ├── monitoring/
 │   ├── grafana/
 │   │   ├── dashboards/
+│   │   │   └── medical-triage-dashboard.json
 │   │   └── provisioning/
+│   │       ├── dashboards/
+│   │       └── datasources/
 │   └── prometheus/
+│       └── prometheus.yml
 ├── reports/
 │   └── latency/
 ├── scripts/
@@ -82,12 +86,14 @@ tech-challenge-fase03/
 │       │   ├── train.py
 │       │   └── inference.py
 │       └── monitoring/
+│           └── metrics.py
 ├── tests/
 │   └── unit/
 ├── .env.example
 ├── .gitignore
 ├── .pre-commit-config.yaml
 ├── .python-version
+├── docker-compose.yml
 ├── Dockerfile
 ├── pyproject.toml
 ├── README.md
@@ -230,6 +236,14 @@ Resposta esperada:
 
 Se nenhum modelo tiver sido treinado ainda (`models/model.joblib` ausente), o endpoint responde `503`.
 
+### Métricas Prometheus
+
+```http
+GET /metrics
+```
+
+Expõe, no formato do Prometheus, o total de requisições (`http_requests_total`, com labels `method`, `path`, `status`) e a latência das requisições (`http_request_duration_seconds`).
+
 ## Pipeline de treino do modelo
 
 O pipeline de dados/treino vive em `src/medical_triage_mlops/ml/` e é exposto por scripts finos em `scripts/`:
@@ -258,6 +272,24 @@ time curl -s -X POST http://localhost:8000/classify \
   -H "Content-Type: application/json" \
   -d '{"text": "Patient with acute chest pain and shortness of breath."}'
 ```
+
+## Monitoramento (Prometheus + Grafana)
+
+A stack de observabilidade sobe via Docker Compose, junto com a API:
+
+```bash
+docker compose up --build
+```
+
+Serviços disponíveis:
+
+- API: `http://localhost:8000` (`/classify`, `/health`, `/metrics`)
+- Prometheus: `http://localhost:9090`
+- **Grafana: `http://localhost:3000`** — login `admin`/`admin` (ou acesso anônimo como *Viewer*, já habilitado)
+
+O Grafana já vem provisionado (`monitoring/grafana/provisioning/`) com o datasource do Prometheus e o dashboard `Medical Triage API` (`monitoring/grafana/dashboards/medical-triage-dashboard.json`), com 3 painéis: total de requisições, latência (p95) e taxa de erro. Gere tráfego com algumas chamadas a `/classify` para ver os gráficos populados.
+
+> É necessário ter treinado o modelo antes (`uv run python scripts/train_model.py`), já que o `docker-compose.yml` monta `./models` como volume da API.
 
 ## Orquestração com Airflow
 
@@ -427,11 +459,11 @@ Essa escolha prioriza serviços gerenciados (menos operação); as próximas eta
 - [x] Documentação da decisão de arquitetura em nuvem (real-time vs. batch, AWS)
 - [x] Configurar o GitHub Actions (lint → test → build)
 - [x] Criar a DAG de treinamento no Airflow (ingestão → pré-processamento → treino)
+- [x] Adicionar métricas do Prometheus (instrumentação via middleware ASGI)
+- [x] Configurar o dashboard do Grafana (3 painéis, provisionado automaticamente)
 
 ### Próximos passos
 
-- [ ] Adicionar métricas do Prometheus
-- [ ] Configurar o dashboard do Grafana
 - [ ] Converter o modelo para ONNX
 - [ ] Comparar a latência dos modelos
 - [ ] Gravar o vídeo de apresentação STAR
