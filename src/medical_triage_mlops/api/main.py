@@ -17,7 +17,11 @@ logger = logging.getLogger(__name__)
 async def lifespan(app: FastAPI) -> AsyncIterator[None]:
     settings = get_settings()
     try:
-        app.state.predictor = get_predictor(Path(settings.model_path))
+        app.state.predictor = get_predictor(
+            settings.model_backend,
+            Path(settings.model_path),
+            Path(settings.onnx_model_path),
+        )
     except Exception:
         logger.warning(
             "Nenhum modelo encontrado em %s — treine o modelo antes de usar /classify.",

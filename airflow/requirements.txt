@@ -4,3 +4,6 @@ pandas>=3.0.5
 scikit-learn>=1.9.0
 joblib>=1.5.3
 kagglehub>=1.0.0
+onnx>=1.22.0
+onnxruntime>=1.28.0
+skl2onnx>=1.20.0

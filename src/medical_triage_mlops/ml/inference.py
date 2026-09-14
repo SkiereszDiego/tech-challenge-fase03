@@ -4,6 +4,7 @@ from typing import Protocol
 
 import numpy as np
 
+from medical_triage_mlops.core.labels import URGENCY_LABELS
 from medical_triage_mlops.ml.train import load_model
 
 
@@ -28,6 +29,29 @@ class SklearnPredictor:
         return _build_results(classes, probabilities)
 
 
+class OnnxPredictor:
+    """Preditor baseado em ONNX Runtime.
+
+    A ordem das classes do classificador não é exportada junto ao grafo ONNX, por
+    isso usamos o comportamento determinístico do scikit-learn
+    `classes_ = sorted(unique(y))` e reproduzimos isso aqui com
+    `sorted(URGENCY_LABELS)`. Isso vale enquanto os dados de treinamento
+    contiverem amostras de todas as classes de urgência.
+    """
+
+    def __init__(self, model_path: Path) -> None:
+        import onnxruntime as ort
+
+        self._session = ort.InferenceSession(str(model_path))
+        self._classes = sorted(URGENCY_LABELS)
+        self._input_name = self._session.get_inputs()[0].name
+
+    def predict(self, texts: list[str]) -> list[PredictionResult]:
+        input_array = np.array([[text] for text in texts], dtype=object)
+        _labels, probabilities = self._session.run(None, {self._input_name: input_array})
+        return _build_results(self._classes, np.asarray(probabilities))
+
+
 def _build_results(classes: list[str], probabilities: np.ndarray) -> list[PredictionResult]:
     results = []
     for row in probabilities:
@@ -39,5 +63,7 @@ def _build_results(classes: list[str], probabilities: np.ndarray) -> list[Predic
     return results
 
 
-def get_predictor(model_path: Path) -> Predictor:
+def get_predictor(model_backend: str, model_path: Path, onnx_model_path: Path) -> Predictor:
+    if model_backend == "onnx":
+        return OnnxPredictor(onnx_model_path)
     return SklearnPredictor(model_path)
