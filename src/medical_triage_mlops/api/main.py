@@ -8,6 +8,7 @@ from fastapi import Depends, FastAPI, HTTPException, Request
 from medical_triage_mlops.api.schemas import TriageRequest, TriageResponse
 from medical_triage_mlops.core.config import get_settings
 from medical_triage_mlops.ml.inference import Predictor, get_predictor
+from medical_triage_mlops.monitoring.metrics import PrometheusMiddleware, metrics_endpoint
 
 logger = logging.getLogger(__name__)
 
@@ -32,6 +33,8 @@ app = FastAPI(
     version="0.1.0",
     lifespan=lifespan,
 )
+app.add_middleware(PrometheusMiddleware)
+app.add_api_route("/metrics", metrics_endpoint, methods=["GET"], tags=["Monitoring"])
 
 
 @app.get("/health", tags=["Health"])

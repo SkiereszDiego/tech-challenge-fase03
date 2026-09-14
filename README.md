@@ -46,9 +46,13 @@ O objetivo é disponibilizar um modelo de classificação de textos médicos por
 tech-challenge-fase03/
 ├── .github/
 │   └── workflows/
+│       └── ci.yml
 ├── airflow/
 │   ├── dags/
-│   └── logs/
+│   │   └── medical_triage_training_dag.py
+│   ├── Dockerfile
+│   ├── docker-compose.yml
+│   └── requirements.txt
 ├── data/
 │   ├── processed/
 │   └── raw/
@@ -58,8 +62,12 @@ tech-challenge-fase03/
 ├── monitoring/
 │   ├── grafana/
 │   │   ├── dashboards/
+│   │   │   └── medical-triage-dashboard.json
 │   │   └── provisioning/
+│   │       ├── dashboards/
+│   │       └── datasources/
 │   └── prometheus/
+│       └── prometheus.yml
 ├── reports/
 │   └── latency/
 ├── scripts/
@@ -78,12 +86,14 @@ tech-challenge-fase03/
 │       │   ├── train.py
 │       │   └── inference.py
 │       └── monitoring/
+│           └── metrics.py
 ├── tests/
 │   └── unit/
 ├── .env.example
 ├── .gitignore
 ├── .pre-commit-config.yaml
 ├── .python-version
+├── docker-compose.yml
 ├── Dockerfile
 ├── pyproject.toml
 ├── README.md
@@ -226,6 +236,14 @@ Resposta esperada:
 
 Se nenhum modelo tiver sido treinado ainda (`models/model.joblib` ausente), o endpoint responde `503`.
 
+### Métricas Prometheus
+
+```http
+GET /metrics
+```
+
+Expõe, no formato do Prometheus, o total de requisições (`http_requests_total`, com labels `method`, `path`, `status`) e a latência das requisições (`http_request_duration_seconds`).
+
 ## Pipeline de treino do modelo
 
 O pipeline de dados/treino vive em `src/medical_triage_mlops/ml/` e é exposto por scripts finos em `scripts/`:
@@ -254,6 +272,49 @@ time curl -s -X POST http://localhost:8000/classify \
   -H "Content-Type: application/json" \
   -d '{"text": "Patient with acute chest pain and shortness of breath."}'
 ```
+
+## Monitoramento (Prometheus + Grafana)
+
+A stack de observabilidade sobe via Docker Compose, junto com a API:
+
+```bash
+docker compose up --build
+```
+
+Serviços disponíveis:
+
+- API: `http://localhost:8000` (`/classify`, `/health`, `/metrics`)
+- Prometheus: `http://localhost:9090`
+- **Grafana: `http://localhost:3000`** — login `admin`/`admin` (ou acesso anônimo como *Viewer*, já habilitado)
+
+O Grafana já vem provisionado (`monitoring/grafana/provisioning/`) com o datasource do Prometheus e o dashboard `Medical Triage API` (`monitoring/grafana/dashboards/medical-triage-dashboard.json`), com 3 painéis: total de requisições, latência (p95) e taxa de erro. Gere tráfego com algumas chamadas a `/classify` para ver os gráficos populados.
+
+> É necessário ter treinado o modelo antes (`uv run python scripts/train_model.py`), já que o `docker-compose.yml` monta `./models` como volume da API.
+
+## Orquestração com Airflow
+
+O Airflow roda em um Docker Compose isolado, em `airflow/`, para não misturar suas dependências com o ambiente `uv` da API:
+
+```bash
+docker compose -f airflow/docker-compose.yml up --build
+```
+
+Acesse a UI em `http://localhost:8080` (usuário/senha são impressos no log do container, modo *standalone*, ou em `airflow/standalone_admin_password.txt`).
+
+A DAG `medical_triage_training` (`airflow/dags/medical_triage_training_dag.py`) executa 3 tasks em sequência, reutilizando as mesmas funções de `src/medical_triage_mlops/ml/`:
+
+```text
+ingest_data → preprocess_data → train_model
+```
+
+Dispare a DAG manualmente pela UI (ou `airflow dags trigger medical_triage_training` dentro do container) para gerar/atualizar `models/model.joblib`.
+
+## CI/CD (GitHub Actions)
+
+O workflow `.github/workflows/ci.yml` roda em todo push/PR para `main` e `develop`:
+
+1. **lint-and-test**: `uv sync` → `ruff check` → `ruff format --check` → `pytest --cov` (sem acesso à rede — os testes usam dados sintéticos, não o dataset real do Kaggle).
+2. **build**: build da imagem Docker da API (`docker build .`), condicionado ao sucesso do job anterior.
 
 ## Qualidade de código
 
@@ -396,13 +457,13 @@ Essa escolha prioriza serviços gerenciados (menos operação); as próximas eta
 - [x] Endpoint de classificação (`POST /classify`)
 - [x] Dockerfile da API + medição de latência baseline
 - [x] Documentação da decisão de arquitetura em nuvem (real-time vs. batch, AWS)
+- [x] Configurar o GitHub Actions (lint → test → build)
+- [x] Criar a DAG de treinamento no Airflow (ingestão → pré-processamento → treino)
+- [x] Adicionar métricas do Prometheus (instrumentação via middleware ASGI)
+- [x] Configurar o dashboard do Grafana (3 painéis, provisionado automaticamente)
 
 ### Próximos passos
 
-- [ ] Configurar o GitHub Actions
-- [ ] Criar a DAG de treinamento no Airflow
-- [ ] Adicionar métricas do Prometheus
-- [ ] Configurar o dashboard do Grafana
 - [ ] Converter o modelo para ONNX
 - [ ] Comparar a latência dos modelos
 - [ ] Gravar o vídeo de apresentação STAR

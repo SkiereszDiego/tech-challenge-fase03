@@ -1,0 +1,6 @@
+# Versões alinhadas com o pyproject.toml para que os artefatos .joblib treinados
+# aqui sejam compatíveis com a versão do scikit-learn usada para servi-los na API.
+pandas>=3.0.5
+scikit-learn>=1.9.0
+joblib>=1.5.3
+kagglehub>=1.0.0
