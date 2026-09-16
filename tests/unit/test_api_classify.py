@@ -34,3 +34,12 @@ def test_classify_rejects_empty_text() -> None:
     response = client.post("/classify", json={"text": ""})
 
     assert response.status_code == 422
+
+
+def test_metrics_endpoint_exposes_request_count() -> None:
+    client.get("/health")
+
+    response = client.get("/metrics")
+
+    assert response.status_code == 200
+    assert "http_requests_total" in response.text

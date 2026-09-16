@@ -56,19 +56,24 @@ tech-challenge-fase03/
 ├── data/
 │   ├── processed/
 │   └── raw/
-├── docs/
-│   └── architecture/
 ├── models/
 ├── monitoring/
 │   ├── grafana/
 │   │   ├── dashboards/
+│   │   │   └── medical-triage-dashboard.json
 │   │   └── provisioning/
+│   │       ├── dashboards/
+│   │       └── datasources/
 │   └── prometheus/
+│       └── prometheus.yml
 ├── reports/
 │   └── latency/
+│       ├── latency_comparison.md
+│       └── latency_comparison.json
 ├── scripts/
 │   ├── prepare_dataset.py
-│   └── train_model.py
+│   ├── train_model.py
+│   └── measure_latency.py
 ├── src/
 │   └── medical_triage_mlops/
 │       ├── api/
@@ -80,14 +85,17 @@ tech-challenge-fase03/
 │       ├── ml/
 │       │   ├── data.py
 │       │   ├── train.py
+│       │   ├── onnx_convert.py
 │       │   └── inference.py
 │       └── monitoring/
+│           └── metrics.py
 ├── tests/
 │   └── unit/
 ├── .env.example
 ├── .gitignore
 ├── .pre-commit-config.yaml
 ├── .python-version
+├── docker-compose.yml
 ├── Dockerfile
 ├── pyproject.toml
 ├── README.md
@@ -152,9 +160,12 @@ APP_PORT=8000
 
 MODEL_PATH=models/model.joblib
 ONNX_MODEL_PATH=models/model.onnx
+MODEL_BACKEND=sklearn
 
 LOG_LEVEL=INFO
 ```
+
+`MODEL_BACKEND` define qual artefato a API carrega ao subir: `sklearn` (pipeline `.joblib`) ou `onnx` (modelo `.onnx`, mais rápido — ver [Otimização de latência](#otimização-de-latência-onnx)).
 
 O arquivo `.env` não deve ser enviado ao repositório.
 
@@ -230,6 +241,14 @@ Resposta esperada:
 
 Se nenhum modelo tiver sido treinado ainda (`models/model.joblib` ausente), o endpoint responde `503`.
 
+### Métricas Prometheus
+
+```http
+GET /metrics
+```
+
+Expõe, no formato do Prometheus, o total de requisições (`http_requests_total`, com labels `method`, `path`, `status`) e a latência das requisições (`http_request_duration_seconds`).
+
 ## Pipeline de treino do modelo
 
 O pipeline de dados/treino vive em `src/medical_triage_mlops/ml/` e é exposto por scripts finos em `scripts/`:
@@ -238,11 +257,27 @@ O pipeline de dados/treino vive em `src/medical_triage_mlops/ml/` e é exposto p
 # 1. Baixa o dataset (via kagglehub) e gera data/processed/dataset.csv com o mapeamento de urgência
 uv run python scripts/prepare_dataset.py
 
-# 2. Treina o pipeline TF-IDF + LogisticRegression e salva models/model.joblib
+# 2. Treina o pipeline TF-IDF + LogisticRegression, salva models/model.joblib e models/model.onnx
 uv run python scripts/train_model.py
+
+# 3. Compara a latência de inferência sklearn vs ONNX Runtime e gera reports/latency/
+uv run python scripts/measure_latency.py
 ```
 
-`models/` e `data/` não são versionados no Git (apenas os `.gitkeep`) — é necessário rodar os passos acima localmente antes de subir a API.
+`models/` e `data/` não são versionados no Git (apenas os `.gitkeep`) — é necessário rodar os passos acima (ou a DAG do Airflow) localmente antes de subir a API.
+
+## Otimização de latência (ONNX)
+
+Como técnica de otimização de latência, o pipeline treinado (TF-IDF + LogisticRegression) é convertido para [ONNX](https://onnx.ai/) via `skl2onnx` (`src/medical_triage_mlops/ml/onnx_convert.py`) e servido com [ONNX Runtime](https://onnxruntime.ai/).
+
+`scripts/measure_latency.py` executa 200 inferências (após 10 de aquecimento) em ambos os backends e gera `reports/latency/latency_comparison.md`. Exemplo de resultado obtido localmente:
+
+| Backend | Média (ms) | Mediana (ms) | P95 (ms) |
+|---|---|---|---|
+| scikit-learn | 0.694 | 0.585 | 0.999 |
+| ONNX Runtime | 0.297 | 0.277 | 0.402 |
+
+**Speedup:** ~2.3x. Para usar o backend ONNX na API, defina `MODEL_BACKEND=onnx` no `.env` (ou na variável de ambiente do container).
 
 ## Empacotamento em Docker
 
@@ -259,6 +294,24 @@ time curl -s -X POST http://localhost:8000/classify \
   -d '{"text": "Patient with acute chest pain and shortness of breath."}'
 ```
 
+## Monitoramento (Prometheus + Grafana)
+
+A stack de observabilidade sobe via Docker Compose, junto com a API:
+
+```bash
+docker compose up --build
+```
+
+Serviços disponíveis:
+
+- API: `http://localhost:8000` (`/classify`, `/health`, `/metrics`)
+- Prometheus: `http://localhost:9090`
+- **Grafana: `http://localhost:3000`** — login `admin`/`admin` (ou acesso anônimo como *Viewer*, já habilitado)
+
+O Grafana já vem provisionado (`monitoring/grafana/provisioning/`) com o datasource do Prometheus e o dashboard `Medical Triage API` (`monitoring/grafana/dashboards/medical-triage-dashboard.json`), com 3 painéis: total de requisições, latência (p95) e taxa de erro. Gere tráfego com algumas chamadas a `/classify` para ver os gráficos populados.
+
+> É necessário ter treinado o modelo antes (`uv run python scripts/train_model.py`), já que o `docker-compose.yml` monta `./models` como volume da API.
+
 ## Orquestração com Airflow
 
 O Airflow roda em um Docker Compose isolado, em `airflow/`, para não misturar suas dependências com o ambiente `uv` da API:
@@ -269,13 +322,13 @@ docker compose -f airflow/docker-compose.yml up --build
 
 Acesse a UI em `http://localhost:8080` (usuário/senha são impressos no log do container, modo *standalone*, ou em `airflow/standalone_admin_password.txt`).
 
-A DAG `medical_triage_training` (`airflow/dags/medical_triage_training_dag.py`) executa 3 tasks em sequência, reutilizando as mesmas funções de `src/medical_triage_mlops/ml/`:
+A DAG `medical_triage_training` (`airflow/dags/medical_triage_training_dag.py`) executa 4 tasks em sequência, reutilizando as mesmas funções de `src/medical_triage_mlops/ml/`:
 
 ```text
-ingest_data → preprocess_data → train_model
+ingest_data → preprocess_data → train_model → convert_to_onnx
 ```
 
-Dispare a DAG manualmente pela UI (ou `airflow dags trigger medical_triage_training` dentro do container) para gerar/atualizar `models/model.joblib`.
+Dispare a DAG manualmente pela UI (ou `airflow dags trigger medical_triage_training` dentro do container) para gerar/atualizar `models/model.joblib` e `models/model.onnx`.
 
 ## CI/CD (GitHub Actions)
 
@@ -353,7 +406,7 @@ O projeto utiliza as seguintes branches:
 - `test/*`: criação ou ajuste de testes;
 - `refactor/*`: refatorações sem mudança de comportamento.
 
-## Fluxo planejado
+## Fluxo do pipeline
 
 O fluxo principal do projeto:
 
@@ -426,12 +479,12 @@ Essa escolha prioriza serviços gerenciados (menos operação); as próximas eta
 - [x] Dockerfile da API + medição de latência baseline
 - [x] Documentação da decisão de arquitetura em nuvem (real-time vs. batch, AWS)
 - [x] Configurar o GitHub Actions (lint → test → build)
-- [x] Criar a DAG de treinamento no Airflow (ingestão → pré-processamento → treino)
+- [x] Criar a DAG de treinamento no Airflow (ingestão → pré-processamento → treino → conversão ONNX)
+- [x] Adicionar métricas do Prometheus (instrumentação via middleware ASGI)
+- [x] Configurar o dashboard do Grafana (3 painéis, provisionado automaticamente)
+- [x] Converter o modelo para ONNX
+- [x] Comparar a latência dos modelos (sklearn vs. ONNX, `scripts/measure_latency.py`)
 
 ### Próximos passos
 
-- [ ] Adicionar métricas do Prometheus
-- [ ] Configurar o dashboard do Grafana
-- [ ] Converter o modelo para ONNX
-- [ ] Comparar a latência dos modelos
 - [ ] Gravar o vídeo de apresentação STAR

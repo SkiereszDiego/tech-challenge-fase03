@@ -1,4 +1,5 @@
 from functools import lru_cache
+from typing import Literal
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -13,6 +14,7 @@ class Settings(BaseSettings):
 
     model_path: str = "models/model.joblib"
     onnx_model_path: str = "models/model.onnx"
+    model_backend: Literal["sklearn", "onnx"] = "sklearn"
 
     log_level: str = "INFO"
 
