@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:35a372ace1d8b65b9b028bb3b5b41a89c48b8a727b1acadaf55b84038f2f4bd6",
+  "claims": [
+    {
+      "id": "claim_76f938ad51fb43cb84447c37df25f041",
+      "statement": "The data pipeline downloads the Kaggle Medical Abstracts TC Corpus via kagglehub and uses shutil.copyfile to transfer raw CSV files into data/raw to avoid Docker bind mount permission issues.",
+      "evidence": [
+        {
+          "resource": "repo://src/medical_triage_mlops/ml/data.py#L18-L32",
+          "version": "repo-lines-v1:sha256:3d3587f698f4e27592090e2937a051391df1accd52a130427ca8e0c02628bc89:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU5NzMzNWE2MTJmMGM3ZTkwZjNkZGRiZDA1NTQ3NmU0MWRlY2E1N2FhMjQ2MDljMGE1NmI3YmU3YzQ2MmMwNTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJlYzVkYzc1NWZkNjEyYjZhN2IzYzhkYzAwNTZmNWI1MTQzZWZlZDgzZTNiNTU5OTg1MmIyNTc5NTMxOGYwNTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE1MmQ2ZmRlNGY3YTUyZGE1NTcxZTg1OWYzMWMzZTEwNWJhNzUyZWQ0NTExYTEyZTg2NGZhMjY2NzdjZmVjZTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjczNjUwNjcyYWQyOGQ1OTgxNjYwYTE0MjVmZjQxMTk5NWRjMTkyNmE2NTk0NTIxNjQ4OTFlYjk4NTQ2Y2JiZTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_f6e9cfbd34ad4a1eb6a3678ab7e10a28",
+      "statement": "The load_raw_dataset function concatenates raw train and test CSV files, renames medical_abstract to text, and retains only text and condition_label columns.",
+      "evidence": [
+        {
+          "resource": "repo://src/medical_triage_mlops/ml/data.py#L35-L43",
+          "version": "repo-lines-v1:sha256:5bee79200f4c2bf3e1dd0a50dff94a0ba09fa1adf5a7179c636ee87f82b3943c:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTQ3MDBjYmI1N2YwMGE1YzY3MDIwMTJmMDk1MzVlOTA0MGE3YTkzMjJjMjZlOTgyMGI2NWNkNGY1ZmNiMGMzYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiN2ViNzAyNTc1OTNkYTA2ZjY4MmEzZGRkYTU0YTlkMjYwZDRmYzUxNGY2NDUyMzdmNWNhNzRiMDhmOGRhNjFhNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiM2Y2M2E0NmYzMzQwNjc5ZDQ3YjI3Mzg5ODI5ZWE0MTI2OTI5Nzg5NTlkNGU2ZGU4NTY2NmQ3YjE1ZjQwZjE3YyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDgyMWI4NGNkOTFjZGMyNmMwZTQ0YmE4OTM3YTZjODU5ODExYTU3YzMzZTZmYjAyMDg5MmNjMWM1MDhjNWVlOSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_302984e6e132424c9141b766e281aa0b",
+      "statement": "The core label configuration maps five numeric disease conditions (neoplasms, digestive system diseases, nervous system diseases, cardiovascular diseases, general pathological conditions) to three urgency levels (normal, atenção, urgente).",
+      "evidence": [
+        {
+          "resource": "repo://src/medical_triage_mlops/core/labels.py#L10-L30",
+          "version": "repo-lines-v1:sha256:18b051b797853ce8f4dd89df6861c17d241f9d734ab2e570827fed7be867c786:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4Y2Q3MTliYzYyOGE2YWVmMjEwZTFlOWViNDQyMDFlNDJjOGU1NWYzZDA3ZWU1NTNiYmU4NGU3YTNiZTVlZmYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUyMmZhYTUzNWJkMmVhM2Q1MmU3NDFlZDQ1NDQzNWI3ZmU0OWU4MzU4NmU5NDNkOThkODJiYmZiMjRkMWY1YzUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ5ZGM5ZDliYjNkMTdhMTI2NmM4MjI5ZjhmYWUxZGJkOTIwOWE1ZGNhZTZiYTcxMjNmOTU2Y2U3MmZmYWEzNDIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_61cf937d44004de8bfab86c6e92b3e46",
+      "statement": "The map_to_urgency function converts condition_label values to urgency labels using CONDITION_TO_URGENCY and raises a ValueError if any unmapped condition label is encountered.",
+      "evidence": [
+        {
+          "resource": "repo://src/medical_triage_mlops/ml/data.py#L45-L58",
+          "version": "repo-lines-v1:sha256:9a33002ccdecbf7acc9f0406a852a1824b8cd698c1214c87134f9e6069371c26:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY1ODY5MDcyZGY4Yjk3NTVlZmFkMWEwYjVhZDI1MjA1MTIzM2I2YWEyZDczODljZmUzZTkxYzVkNGQxNDFlNjUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcxNjZjMDcyN2FhNGZhZjBjZGVjODgxYjdjY2QwZDU0NWJlZDZmNzEwMTE2ODJjODZmN2M4MmE2NDY5MzYzYjEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBiMDJhODM3MGFiNGNhOWQxYjJkMDAzMWViNmFjNjZkOGE3YWQ3YmNlMzQzYTE0N2FjZDFlMjYwY2NjYTQwZTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImVmOGE0MmRiYWEwOTVjOGI2ODM5MzAyZWUyNzUwNjU2MjE0MjA4NWIzNzJjZDI5N2FmYjJhNjkwNzJkY2FiMGEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_69aac3f3dd144ce189a9a8d7a6ba2c39",
+      "statement": "The build_processed_dataset function loads raw dataset files, applies urgency mapping, and exports the final dataset to data/processed/dataset.csv.",
+      "evidence": [
+        {
+          "resource": "repo://src/medical_triage_mlops/ml/data.py#L61-L68",
+          "version": "repo-lines-v1:sha256:e36b7b40b03d7f15125cf71cb884c431e76b73b57f26fbfbc9dc9f88c2dfbf81:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNWUzODk4MDIyMTc0YmRmMjI0MWI5YmEwOGRmOGQ4MWE1Y2Q2ZmRmNDA3YjgwZGJjMDk4ZDUwZTUwY2JmNzBiNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYTNkZDQ1NTFlNmMwYmRjNjhhM2E0NWQ5Mjg3YWVhYjA4ZDdkMGI3NGU3MWY0YWVlZDcyNTI5NjMzZjRiYjIzNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODQ4NmFiNzQ1ZWU1ZjA0NDMwMWNlYzEwZmQ0MzY3Yzk0YTdjOWQ4OTBiZDk1NTFkMGNmZDEyNGI4NGRhZGU1YSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_24d75a269510472eb34eb7305774e66d",
+      "statement": "The dataset preparation pipeline can be executed via the CLI script scripts/prepare_dataset.py or orchestrated through the ingest_data and preprocess_data tasks in the medical_triage_training Airflow DAG.",
+      "evidence": [
+        {
+          "resource": "repo://airflow/dags/medical_triage_training_dag.py#L24-L35",
+          "version": "repo-lines-v1:sha256:038f77693f288b3ebc191b0055da283763c8a634c786c66ff9d562c749df4cfd:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVhMmIxYmM2Y2Q2ZWE1MjZhZGQ0MjE1NTMzYzBiYjFiNjgzNjc1ZDQ1YWI2ZWU4NjIzZDkxNzY5OThjMjk2YzciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdlYjcwMjU3NTkzZGEwNmY2ODJhM2RkZGE1NGE5ZDI2MGQ0ZmM1MTRmNjQ1MjM3ZjVjYTc0YjA4ZjhkYTYxYTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhmZDdmNDRkNDFlNjVmNTNkZmI4MWRjMGFhMjA4NWUzNjQ5Mzk1MWJiNGZkNDA3YjFhYWYxMjVjNjFhMjJjZTIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ1NjAxMzQxZmJmODI2ZWQwNGY2YjQxZTFhZjk4NWVhNTQyYzM5ZDk3MmRkY2RkMGExNWEyODFlZWU1YTUyYTgifQ"
+        },
+        {
+          "resource": "repo://airflow/dags/medical_triage_training_dag.py#L64-L65",
+          "version": "repo-lines-v1:sha256:d90214be3adaaaabcfbddc68e8e6819ec0f34ea4cd44be2740528f1a2fabe50a:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZjI0ZjI1YTg2NzE3NjZlMWUwZWNmYTMwYjZkYTdhNDVhY2NhMDg5YzcyNmY0ZjkwMDFjYmIwMTUwODZkMGJiNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDk5NWFlODdhZTEwZTcxNjY2MWI1NGVjYWRhNDM2ZmY1MGViYjhiZDMxYWUyYTQ0MzUxZTVkNTNhODJjYWRkMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzE4MWFmZmNiZDA2MWJmZjFlZWIyN2RiYzVjZGJmMTEwZDcxMzBhYzM4ODA1YzA4YTdhMDg1MmNkN2EzYzY5OCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMjZkZTE3ZjE1YjVmYWVkMzFlOTAyNGJiNTI1MzEyNTE2MDQ2MzMyMzExMWMxOWE5ZjRiMDY5NmFjZTlkM2I1ZCJ9"
+        },
+        {
+          "resource": "repo://scripts/prepare_dataset.py#L1-L27",
+          "version": "repo-lines-v1:sha256:af31f527dd3e29b4bacc37f6eef1606c56b1d7fb2b9ac9113c84c6d6df0c1900:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE1M2Q4MzZmNDgyZThjOTEwMWViMDE2NWQxMWI3NzBlZTE3ZTQwOGVmYTFjOTkyNDM3YmIxOGFhNDE5MWI3YzIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA1ZTVkZWY2Y2M2N2M4MjdkZjgzNjA2MjFkNDFhYmRlNjc0MTlhNTBiYjIwMWY1ODEzOGVlYThmMWFhNjljZTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_897676da8b2c4a2599d17a4b9cb491ec",
+      "statement": "Unit tests in test_data.py verify that map_to_urgency correctly maps all valid condition labels 1 through 5 and raises a ValueError when passed invalid condition codes.",
+      "evidence": [
+        {
+          "resource": "repo://tests/unit/test_data.py#L7-L26",
+          "version": "repo-lines-v1:sha256:37280ef794e589c7592466df263e7bbd907db94b41afaed4b23fc77fe354d3d2:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQyZDBjZTcyOGViNGQzYjVkOGZiMjhmMDQzMmZlZWUzNTAyZjY1MzUzNTVmZTQ4YjhmMGZlMjYwZmUyNGUyMjgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY4ODFmYzEyM2ViNGI3MWNhYzY1NTI2MTM4ODQwZWFjNDliYWM4ZjM2NjkwMWM5MTE4ODA1N2Q1ZjFhMGIwY2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM4Nzk0YzUwYjQ1N2EzOWIzMzU3ODY0MzVlODU2OGE2ZjI0MDZmOTM3MzZkYmEwNzJlZGYzNGJkNWE0ZTMyNWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-24T12:24:27.905Z"
+  }
+}

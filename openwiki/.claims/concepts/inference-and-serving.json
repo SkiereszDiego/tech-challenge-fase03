@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:8b08206e1df7803deca7f2667bfed1d79e099650933933f2361afdec51c6414b",
+  "claims": [
+    {
+      "id": "claim_ec057fc0dfe440ff854df59897f205c3",
+      "statement": "The FastAPI application loads the inference model during startup via an async context manager lifespan function and stores the resulting Predictor instance in app.state.predictor.",
+      "evidence": [
+        {
+          "resource": "repo://src/medical_triage_mlops/api/main.py#L16-L31",
+          "version": "repo-lines-v1:sha256:10aa9029385904f02b9a87350019f228e9b4fcf4c3ae4471eb0a8f75b10102cc:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNiY2M0NDVlYmQyMGQ1ZGYyYjlhMWY3M2JjODdmNjQyZWQ1MTcyYmFmNzc3NzAxNzJhNTczNzJhMTQxOGVlOWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM0ODQ3NGViMjE5MWExNTU3MzRjZWQzNTk2ZjdlNDA0ODcxNmJjMGZhYWM0ZmUyZTkwMzExM2RjMjQyMWQ0ZGYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRmNTIxOGRkNWVjM2EwZmIyNjRhNzQ1MDYyMjc0YzhhYTE0M2NjYTVmNjFlMWU3ZDdkY2IyMTBiMzJiYTEzMjQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjcyYjY2ODkyZjQ3NjhlNjE0MmUyMDYwYWVmZWQwNmFkMTYzYmY3YTZmODJlNmU1ODRmNjg2MDFiNDBlMGI3N2YifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_2b135c5528074f2baf25436a34e29767",
+      "statement": "If model loading fails during lifespan startup, the service logs a warning and sets app.state.predictor to None, allowing the application to start without crashing.",
+      "evidence": [
+        {
+          "resource": "repo://src/medical_triage_mlops/api/main.py#L25-L30",
+          "version": "repo-lines-v1:sha256:97d8a6fc10d72ff91b8613d2e49f7fb5076f314a3360931188bea1a31c34d5ee:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMWY4NjAyNWM2NWIwMGE0NzEwZGJmNzQ5NjRlNDgyYzZhMWE5MGFlYjZjYjgzOTNmNjFjZGQ2Y2NjMzRlMDBiMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYWE0NzgzNDUxYmZiZDgzZGNhY2YzYzYwN2RjOTZmOTRjOGIxMDIxNzRkMTEzMTcwOGZlNzk1ZTY3N2RjNDAyMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODg0MzU5YmFhZGRhNDgzZDMyYTQ4NDBmNzI5MjM0MTBkYzM3NjFkOTI2MGIyNzIxZDlkMTc4YTVhY2YyMzk0ZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNWYzMDZkZjdjMGM0ZDJlZGVmYWI1ZjdkZTUyMDhlMjk5MWYyMTM2OWVjYjIxNWZiYTQ4ZTczZWJmNzZkMDJjNyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_508ee347bff742768f22602e10dd215c",
+      "statement": "The get_current_predictor dependency function inspects app.state.predictor and raises an HTTP 503 Service Unavailable exception if no model is loaded.",
+      "evidence": [
+        {
+          "resource": "repo://src/medical_triage_mlops/api/main.py#L50-L56",
+          "version": "repo-lines-v1:sha256:64a2cddf6b4e1d5c8b51ba3b3aafb57deb4ae4bfb7567a43c1356b8d0bba17da:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMGJmYWE4N2M5MmNjMWY0MDg2NTg5YzYwYjc5NjgwMjZlYTc1NjNjN2EzZjY2MWFhMzE2M2I0MjNmMTMxMDU5NSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTRlZTU1Mjk3NjMwNTNmYzM1M2RiODVmYTZmNjcxYzE1MTFjMjFjOWI2ZDVmMGMwYjY4ODdhY2JkZjFkOGQ0YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODZlZThkNmI3NDM1MmJjYzhjNTVhNTBmZDZmMzJlYmM4MTRjYmNkZjMwYjJlM2ZhYmJlMGVlN2RhODdmMGY2YiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOGQ4YmE2NjU3OTBkNzYyYmIzMjczYmI0ODc1NWQ0MjNkMjI3NTI3NzhmMmY2NmQ5ZTYyZGE3YzBlNDVkMGYwOSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_8543a50ad52b446c9a5fabd64a563bf1",
+      "statement": "The Predictor Protocol defines a unified batch inference interface that accepts a list of strings and returns a list of PredictionResult instances.",
+      "evidence": [
+        {
+          "resource": "repo://src/medical_triage_mlops/ml/inference.py#L11-L20",
+          "version": "repo-lines-v1:sha256:38b7cbd63025ee0ba645e82ff60b4a55c5aa86c4d248bf61961aacc9774ec7bd:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVkNzBiNmYxNjkzY2RiMzU5YmUzNDg4MTA1ZGZhOGI2ZmU1NmRlOTcyY2U1NDZjNGY3MWFhMzg1NGZlMTI1YTgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdlYjcwMjU3NTkzZGEwNmY2ODJhM2RkZGE1NGE5ZDI2MGQ0ZmM1MTRmNjQ1MjM3ZjVjYTc0YjA4ZjhkYTYxYTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdlYmMxNzhlOWMzYTRiMjhiZDllNzMzYzAxZDUyMWQ3M2Y4YmFlZjQ0ZGJlM2I3MDQ1ZTNhNWFlYTBjMTQwY2UiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM2ZTI5Y2FiZTI0OWQyNDExYmYxMDY1MmQxMzUyNjg5ZDMxZDdmYzRmOWZhZDc3YWRlYzJiNGM0M2MzODI3YjAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_f2b23bbd2f2e477294b3058ce5df99ec",
+      "statement": "The get_predictor factory function instantiates an OnnxPredictor when model_backend is configured as 'onnx' and a SklearnPredictor otherwise.",
+      "evidence": [
+        {
+          "resource": "repo://src/medical_triage_mlops/core/config.py#L17-L17",
+          "version": "repo-lines-v1:sha256:a197bd0d94aca9750deb2de9f52cf6b5d35a0058be28451a7b8301469d0b9c23:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTE5N2JkMGQ5NGFjYTk3NTBkZWIyZGU5ZjUyY2Y2YjVkMzVhMDA1OGJlMjg0NTFhN2I4MzAxNDY5ZDBiOWMyMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYTE5N2JkMGQ5NGFjYTk3NTBkZWIyZGU5ZjUyY2Y2YjVkMzVhMDA1OGJlMjg0NTFhN2I4MzAxNDY5ZDBiOWMyMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMzc4YWRmN2VlNTI2YTFiNDA5OWJhNTcwNTYyODNmNzM3N2QxZGMzODVlOGRhNmRhMTZmZjMxODdhYWYzNzU4NiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYWFkMTJlZDFlYWIzMzBiYjVlMGNjNjA1OTdiZDg5Njk3YjY4N2UwMjVhMWVkNTA2ZWQ1M2Y4Y2I2OGY1NGQ0NiJ9"
+        },
+        {
+          "resource": "repo://src/medical_triage_mlops/ml/inference.py#L66-L69",
+          "version": "repo-lines-v1:sha256:6a283cb0cdeefa7c1f0f1d8d2bdcd2ddb18c24648bec61d599be2a9787d46efe:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzY4ZGUyNjYxZTJlNTYzN2M2NWE3OGQxYjJjZDk1MjIyMzM4ODJmMjE5OTU1NzM2ODYzYjE5N2FkZDc3ZDM3ZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTE3NDNjYmQyYjM5ZGM1YWQyNzY1ZjUzOWQ0YmU5YTk2NDIxYWM2NDIxMWFmZDU1ZDZjNWEzZTIzZWVkOWJiNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiM2M3ZmZmYTk3MmY1MWQyNTIwNDEwMDM1ODM4NjYyNTEzNzMyYzg5NmFhZjQ5MjM1ZGM0YTM3ZDk5NDU3ZTRkNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_29c9d804756d4c759dce9430835bd803",
+      "statement": "SklearnPredictor deserializes a Scikit-Learn pipeline via joblib and generates predictions using predict_proba.",
+      "evidence": [
+        {
+          "resource": "repo://src/medical_triage_mlops/ml/inference.py#L22-L29",
+          "version": "repo-lines-v1:sha256:dcec804f93e3fdc041e4dfa7b45c646e93c461d21da78f3093e7e45076b88c45:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOWUxMWY5N2FiMmJjYzc1N2JmNTliNDg3N2JmNTJjMWM3MmIwYTQ1MDk0NmM1NDUxMTFlNWFmOGU4ZGIyYjJlNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDQ2ZDc0MDIzMTllYjMwMDdlMzM4MTIzZjdhYzk5ZmQ1Nzc2ZTg3Y2U2NGJhOTRjMjU4YzkyODM0YzExZWM0MiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDk5NGI3MDc1YzA5YzVmYTQ5MThjYzg4YWI5MjczMzRlZjkyMjY4OWFiNDFkYTJhZWQ4MmMxOTk4ZjE0ZGEwMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTQ2NDI5OGJmMWI4YjdiNTkyMDdlZDM4ZWM1YTQwMjlkNDRlZWJlMjM0MzIwMzRmODcyMTNiYzhiOTFjMGM3NyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_d7caf46264c946ebb01266f238090337",
+      "statement": "OnnxPredictor uses ONNX Runtime InferenceSession to run inference on string arrays and orders classes using sorted(URGENCY_LABELS).",
+      "evidence": [
+        {
+          "resource": "repo://src/medical_triage_mlops/ml/inference.py#L32-L53",
+          "version": "repo-lines-v1:sha256:771bf47a8c41c70e863263894a229879a4114a7d86fcc87c644582d38fa1d789:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJkZmExNmExOTk4NjY2MWQ4Y2MwM2IxYmU3ODM2NzNjYTg3MTI5MWU4YzU3OWFiZjU0MmMwNzQyOTc2YjY3ZjgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdlYjcwMjU3NTkzZGEwNmY2ODJhM2RkZGE1NGE5ZDI2MGQ0ZmM1MTRmNjQ1MjM3ZjVjYTc0YjA4ZjhkYTYxYTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRiMzBhNTA4NmYwNGY2YmViYjRmMWI4MmM4MjAxN2VhZGY1ZGViZWY4MDY2ZmU2OWNlYTZkMzljZTgzNDUxM2IiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFlNjJhNDEzMTJkNTEzMWZmOTA4MWIyNjFhZmY4YWU4ODcyNjczZTExYTExNDkzZWU3YzQzODkxZGI0NTA5YmIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_4c44ddc03f73401e933cf2ceac543d14",
+      "statement": "The _build_results helper maps predicted class probabilities to class labels, identifies the top label, and formats confidence scores into PredictionResult objects.",
+      "evidence": [
+        {
+          "resource": "repo://src/medical_triage_mlops/ml/inference.py#L55-L63",
+          "version": "repo-lines-v1:sha256:ce702f293fcbf04452d8e27a47ff08d035f9afd251d094e57227e8861682fb04:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMWJkYjgyNzZhYjJhM2M0NGVlNmI3NmYxZWY1NTQ3MTZhNGI2ZjhhMWU3MjEyNTE4MDBiMjQ5ZjE5MzZkNjZjNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDA3MWU2MmM0MThlNGQwMzFhYTg0OGQyOWU1YTkwMTk3MDljYTEyMGFiYTQ1YjA2NTliYmU0YzRjMTdiNzI2MyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMGNmMWM2YWFkN2RkOGY0NDA3YmM3MTZhNDMwMTQyODUwZDYwNTY2ODJjNWI4NTk5YjYyNjlkNDk3MTAxZmRlNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMWMxYWQ1Y2Q3NzhjY2VhNTdiY2E2ZjllOTA0YTc4YTdiM2E2OTM1YWNkZDY0NGNkNjc1Nzk2NWU2MTU4YzMxZCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_413c45bff4574c95ac3fb8b168ad2012",
+      "statement": "The TriageRequest schema enforces a minimum length of 1 character on text inputs, triggering a 422 Unprocessable Entity error for empty payloads.",
+      "evidence": [
+        {
+          "resource": "repo://src/medical_triage_mlops/api/schemas.py#L4-L5",
+          "version": "repo-lines-v1:sha256:7051f36d1f75876a5aa088495a54e85a31c2de74f509eba5acc13d51b8a560f3:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODUxZjAzMWRhZWJmYWE5Zjk1OTcwNmIxMjA2ODhhY2NjNzUzNWJlOWUzYTdiNDUyN2UxZjUwNjMzMmJjNGM1MSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYTEwYzAzNDEwNDMzM2Y0ODU5YjIzNjlhYmFlZWJiNTk1YjgyNjdjODFiMWI5NzNkMGRhZGEyNTlhYzFkNzczOCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDg2ZDQ3OTY5YjY2MDZmYzZjNWQ4ODViODA2NmZjZWM4MWE1MDc1NmI4MDNhMDUyNDFhMzY5MjdiMGY3YmVkOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTEwNGNkZDA2ZDRiZmNiYTQ1OWNjZTgxZmRkMDNhYmFlNmYyNTU5YzIzNjljNDMzYTk1NWMwYzMyZGZjNjJhZiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_41707f8809074ce3894addf4abb5dc5d",
+      "statement": "The /classify endpoint accepts TriageRequest payloads, delegates prediction to the injected Predictor dependency, and returns a TriageResponse.",
+      "evidence": [
+        {
+          "resource": "repo://src/medical_triage_mlops/api/main.py#L59-L65",
+          "version": "repo-lines-v1:sha256:c5680f811b056efd838de54b79a8c6f4afc979680c64cee36029a3d594a32d1a:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTYxZGM2ODM1YTU0MzIxNTVkYTNiMDFlZTE2OWU3OWUyYTI2ZTYzZjNiYjIyODllYTZjMDczN2QzOWNlZjNlZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzU0MTI2ZGM5NjhjNGVhODRlNzUxNDYzODgzNWIxYjFkYzFjZDU5ZjE3YTQ3ZTNkZjlmMDhiNjM3ZGIxN2JhNCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZjQ1MDBjZDUyNjY3MzQzNjk3OWE0OGM4ZmM4ZDA2ZjNhZWMxMTE1NGQzNGE1ZGRiN2JiY2Q2OTBmOTAwNjRkMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_f9ff579ac454417aa06ca2cbe760a56a",
+      "statement": "FastAPI dependency overrides enable replacing get_current_predictor with test doubles like FakePredictor during automated testing.",
+      "evidence": [
+        {
+          "resource": "repo://tests/unit/test_api_classify.py#L7-L20",
+          "version": "repo-lines-v1:sha256:fc5e98860d346ec45ae87266dcc03304875cace4040749e51e32be87eee6c76f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNjZTFjNWExYjk1YTQ5YjU2MjhiYzRkYTQ5OTBiNTQzNWUzN2ZmNzRhYmJkNjVjN2I4YWJhYTFjZTk2ODg5M2IiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRkMjlhZWVlMzE0NDlhOGM5ZDY1ZjVmNTUxOGZkOThiZTBhYTEwYTU3N2RiYjk5MDFkNzJjOGY0ODg3Mjg0MjYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRiY2NlZTAzNTMwODNmY2QwYmU5NWRmZDcxN2E5NzExZjczNTk4NWZmNDlmOWUyZDQ0MjI4ODk3N2VhYWM2ZjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA5OGU1YzFkZGFkMjczZjA0OWRkNzgwZDMxMzQxZjJmMzFkYzNmNzAyZWViNzhjYTM5MTJiODg1Njk2NTgxNmUifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-24T12:24:27.905Z"
+  }
+}

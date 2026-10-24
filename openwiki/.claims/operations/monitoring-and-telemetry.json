@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:cb1270a5803d06f885159b1ccb105daa1794dc8b73e894a997ee58c75550955c",
+  "claims": [
+    {
+      "id": "claim_907beeb19ce04a199bd126d53e75e929",
+      "statement": "PrometheusMiddleware intercepts incoming ASGI requests, forwarding non-HTTP scope types directly to the wrapped application without recording metrics.",
+      "evidence": [
+        {
+          "resource": "repo://src/medical_triage_mlops/monitoring/metrics.py#L21-L28",
+          "version": "repo-lines-v1:sha256:875fd30ac6fde12b0f2a43a9cf52dcdee193a896e607c9ac4b1a71eb42159a50:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNWE0NTA0NzU0OTQ5NDU5MjZjMzQwY2U4NWI5NDIwZTM2MDBjMWFiNWRlMmNkYWI4ZWMzNWI5OGY4NTI3YjUyMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZmE5NmIzN2U3ZDQ1MTJmOTkyNzJhZDg2MzQzNjNkMGI0MDBhMWM4YzQxYTgzYjJhZGUwODFiZDc3ZGE3MmY4MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOGU2Y2QyNGYyZWMxZWY0YmQzOGJjMGRmMDFiOGQ1OGMyMTZkYjYwNjM5OWFlM2QwYmE0NDg0OTM0ZDQxMTZjMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYmRjMTZmZGY2YzM2YTQ1NTNjYzI3YWM0MjE3YzU2MGY1ZDNlODFiNmFjZTAwYzRiMmY0MjBjNTJiYjEwY2MyZiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_1c825eafd06b4ae6a40dad5a1049cf72",
+      "statement": "PrometheusMiddleware initializes a default status code of 500, uses time.perf_counter() to measure request latency, and wraps ASGI send events to capture response status codes on http.response.start.",
+      "evidence": [
+        {
+          "resource": "repo://src/medical_triage_mlops/monitoring/metrics.py#L30-L38",
+          "version": "repo-lines-v1:sha256:d4d040f0b42adf697dbd69c5eea08548002dd7be8ea5430521442cf538d28153:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGFmODlhZmRhY2IxYjdkNTUzZjNlMmFkNDA5YjdiZDk2ZjlkMjIwYzNiMTRjMDhhZmJhZjk1YjQzMDcxMzcyMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzNkY2ZjNDM5YWRhMDIwMTg3MzllMDlkZDM0ZTA3NmZkNjRlY2FjZmY2ZTlkZDI1NzFjNjhlMDViMDFiNDVkYyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzNhOTU3OWVkZjFmYmRiMjg2MGI5MDA0MTY1MWI4NDZkNDEyOGZkNzJiOGNjODAyMmI3YjdlNDQwNDYxNzgyOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDdhYTE2NjE4ZGQ2MjVmNTUxNTFkMDM3NGNlNDM5YTdmYmQ4ZTRjZDNiNmUzMzYzNWNiMTdlN2FjZjU4ZjM0ZiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_841670ffcdbc48d9af737372850f208f",
+      "statement": "Request duration and total request counters are updated inside a finally block to ensure metrics are recorded even when downstream handlers encounter unhandled exceptions.",
+      "evidence": [
+        {
+          "resource": "repo://src/medical_triage_mlops/monitoring/metrics.py#L40-L46",
+          "version": "repo-lines-v1:sha256:a79478eb43d5ba6a036a6bffc398c6b4c531d78da72aed3b5f855ee2d62f03b5:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZmE5YWI4MGU4NDdmNmRhZmZkMDdlMjJlNGZiMDg5NzdlZDcyYzYwNThmMDkwNDBhODNjZDBjNDcyMzIyMWYwMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiN2ViNzAyNTc1OTNkYTA2ZjY4MmEzZGRkYTU0YTlkMjYwZDRmYzUxNGY2NDUyMzdmNWNhNzRiMDhmOGRhNjFhNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjY0ZmM5NmZkNDU2ODk2ZTczYTI3YTc1YzMyOGUyYTg1NzBkYTQ1MjExMTBhZjIwNzM2YjIxM2I1ODdhYTMzNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDhmN2VmMTc4N2NiN2JhOTRmZWFmMjZhYjQ2YWY2MDQ3YThhZTBkMTFlZDE0MGE2MTI4MThmMmVkNGJmNDk3YiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_827e621187e04f80af0ace84f1005f00",
+      "statement": "Metrics in metrics.py define a Counter http_requests_total with method, path, and status labels, and a Histogram http_request_duration_seconds with method and path labels.",
+      "evidence": [
+        {
+          "resource": "repo://src/medical_triage_mlops/monitoring/metrics.py#L8-L18",
+          "version": "repo-lines-v1:sha256:3232ec1ef27b33625edde8b28cf9010a2456fbfe641001fdf4c3b66294f7fdd7:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MGJhMmY0OGExYzRiNmExMTRjZDc0MjBlNDFhMDE5MmZkOGZlZjE2Zjc2OWJjZDJiY2Y0YzllMDQyZDkzZTYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjliMzllMDIyZTBkODU0MTIwMDAzZDc5MGMyOGI3NTk2MmVkZDMwMzc1NmQ1MTMzM2RmNzQ1Y2ZiODZlYTExY2UiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRiNDhmMGQyN2FlYmIyODQxMGRjNDg0N2Q0NWVlZGI2ZThmNjIzZDY1NWI4OWM4MWFjYmE4ZWJjMzFjMzQ1YTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY0OGVmMmNhM2IwNGUwZWUxM2Q5ZmMwOGM1NDEzN2IwNjM0MzkwMTY0ZjI1OGI2OTJlZjZiMzgzNjg5MTU0OTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_60dad7b9e3ae461493b104afd40703e5",
+      "statement": "The /metrics route uses metrics_endpoint to output Prometheus metrics in text exposition format via generate_latest() and CONTENT_TYPE_LATEST.",
+      "evidence": [
+        {
+          "resource": "repo://src/medical_triage_mlops/api/main.py#L41-L41",
+          "version": "repo-lines-v1:sha256:2cd1e0dee90335fb44412e90ccf5ed33d44f97cf73343c23a16166acd3ac35df:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMmNkMWUwZGVlOTAzMzVmYjQ0NDEyZTkwY2NmNWVkMzNkNDRmOTdjZjczMzQzYzIzYTE2MTY2YWNkM2FjMzVkZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMmNkMWUwZGVlOTAzMzVmYjQ0NDEyZTkwY2NmNWVkMzNkNDRmOTdjZjczMzQzYzIzYTE2MTY2YWNkM2FjMzVkZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMzEzNWFiOWNkNDYwNzQzOGI4MjQ5MTEwYTM2NTFlY2VlYTU3Y2Q5YmYzMTMzMmVkOGExNDQzZmFmNmNiMTRmNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMjk3ZDBmMTA2Mjg5NjM2ZDNhZGUyMzZhODIwZGNiYmNjZDdkNjdiMDUwZTkzMDdmMWM5MjRhNGFmMzk1YWE4ZiJ9"
+        },
+        {
+          "resource": "repo://src/medical_triage_mlops/monitoring/metrics.py#L48-L49",
+          "version": "repo-lines-v1:sha256:41797034adbde66607cd16f4e869dc45fc327f0f341b3feb35c71c7647f79504:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMWJhOGMwMzg3MTM0OWU4Mzc4OTdhMzA1Y2ZlMGVjMGJlOWE4NTk1MWY0YmQ3ZDU4OWFjZjE3MTAyMDUxZGU0MCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNWRlOGRhODJkYmY0YTc0ODY5NGRhZDBlZmIzOGM4ZDQ0ZmQwMzFlYjVkMTJmY2E2MzMyMDc3OTdiNDc4NDE4YyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZWY1NmM3M2E2MzZjMzExOGE3Nzg3NmMyNjI5NWJkYzg4M2IxOWVmZDA5YzM4MzViNjVmZTAwNGZhNDNhNjYxMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_d18bdfb0fec54dba96232747b4b94717",
+      "statement": "The FastAPI application mounts PrometheusMiddleware via app.add_middleware and registers the /metrics GET route tagged under Monitoring.",
+      "evidence": [
+        {
+          "resource": "repo://src/medical_triage_mlops/api/main.py#L40-L41",
+          "version": "repo-lines-v1:sha256:93be92789820e1d115813230a94e3843a522a6606d041d27153689182880b354:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiM2E5Mjk1ZjVmMzc1NzZhYTMyNGQ0N2U3MzRiYzBkZDhmNmFmNmUzMWVlNmYwMGZiYzlmZjhhZDMyMjVlZWM0YSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMmNkMWUwZGVlOTAzMzVmYjQ0NDEyZTkwY2NmNWVkMzNkNDRmOTdjZjczMzQzYzIzYTE2MTY2YWNkM2FjMzVkZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTY5YzYzZjVlMGY4MDUxODUzZmU1MGM2ODUyODU5NTJmZTdlNDY4NjVkMmZlMzU0MTFlNzljMjUxMGYwMGNmOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMjk3ZDBmMTA2Mjg5NjM2ZDNhZGUyMzZhODIwZGNiYmNjZDdkNjdiMDUwZTkzMDdmMWM5MjRhNGFmMzk1YWE4ZiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_993883f90aea44b79d43a2a701314bc9",
+      "statement": "Prometheus is configured to scrape the api:8000/metrics target at a 5-second interval under job name medical-triage-api.",
+      "evidence": [
+        {
+          "resource": "repo://monitoring/prometheus/prometheus.yml#L1-L9",
+          "version": "repo-lines-v1:sha256:3ab84886476ac7ca3895300bc06ff980d64e4b92f1cf009bf4168ba36b30d2db:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDNiYWYwNzA0NThjODQyMjAwMDJjZGZmNzVhMWVlZmE0Mzk2MzNmYzYzMjdlZjZlODBjYzdlODkxZjBiOWRkNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjM1MjNkZDg3MGZlMDkwZDE0MzE3ZDllNTczODRjMGM1ZDE2M2Y4N2NlZTBhZTFiNmQ0YWJmOGNiY2QxZTBmNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_fc984d237ad04a1e9a37f59ce4d6d391",
+      "statement": "Grafana is automatically configured with a default Prometheus datasource pointing to http://prometheus:9090 and a dashboard provider scanning /var/lib/grafana/dashboards every 30 seconds.",
+      "evidence": [
+        {
+          "resource": "repo://monitoring/grafana/provisioning/dashboards/dashboard.yml#L1-L12",
+          "version": "repo-lines-v1:sha256:15e5b5a610c3e1c12ed060e605967807a8f317547c3d57828be65410c4885116:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY3MTc2NTJiM2NkNTg0NDI3YTM1MzhjZWUxYjIxZmJmYzBmY2I3NzdlNjNjMzg2NmE2YTViYzc4ZjhiMzBiYWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMwMDkwMGQyYzU1NDlkN2Q2Yjk1ZmJlY2QzNDY1Mzk3OTBjYTVmZGEzM2VlZGRmOTY3NmI0OWIxMmJmMmY1ZTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://monitoring/grafana/provisioning/datasources/datasource.yml#L1-L9",
+          "version": "repo-lines-v1:sha256:742817122a52434d8fb37879a9ba5d6e1c2f9b614730d2c0840f86964bb98e19:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjcxNzY1MmIzY2Q1ODQ0MjdhMzUzOGNlZTFiMjFmYmZjMGZjYjc3N2U2M2MzODY2YTZhNWJjNzhmOGIzMGJhZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZGE3Njc3Y2I1ZTBhMGE5ZTY4NzhlMTYwN2ZmZTVkZTU0YWFiNWFlNmY1YWRlNmUzMDc1OTlhYzc5Yjk4MTQwZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_aa193f4d4bfd4e87bdaa77d5cfe1ba91",
+      "statement": "The provisioned medical-triage-api Grafana dashboard renders visual panels for per-path request throughput, 95th percentile request latency, and HTTP 5xx error percentage refreshed every 5 seconds.",
+      "evidence": [
+        {
+          "resource": "repo://monitoring/grafana/dashboards/medical-triage-dashboard.json#L1-L53",
+          "version": "repo-lines-v1:sha256:b9581f986095acd57fa5aa67df608d30276ed0e3eed5b7eb4b1d3ea4b9435c1b:eyJzZWxlY3RlZExpbmVDb3VudCI6NTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgzZWFlN2U2YTRkM2M3MWJjYzk2MzI4YzUxOWZiYTI5NDFlZTQ4Njk2OGE2ZDYzMjJmYjA4Y2ViNDRlM2VmZDYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUyMmZhYTUzNWJkMmVhM2Q1MmU3NDFlZDQ1NDQzNWI3ZmU0OWU4MzU4NmU5NDNkOThkODJiYmZiMjRkMWY1YzUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_5ff7dad164f84e9f9591c7b6b5cdd442",
+      "statement": "Docker Compose orchestrates the api, prometheus, and grafana containers, declaring depends_on relationships and mounting configuration volumes for telemetry collection across ports 8000, 9090, and 3000.",
+      "evidence": [
+        {
+          "resource": "repo://docker-compose.yml#L1-L44",
+          "version": "repo-lines-v1:sha256:81f6ea6b0bc8135a66fff7d7de0ead41f8c0e09abbcd43c9ffbc95ed2a49a02f:eyJzZWxlY3RlZExpbmVDb3VudCI6NDQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZjZmVlYWJkODk2ZDhlYzU0OGQzOWI0NzUyNGEzOGFhZDU5MWM3ZGZlMWRhYzQzNGJkYzBhZDIzNzAyZDlmZDgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAwMTI3YWZmZTY4ZTFjNzEyMjBiNmQ0Y2Y3OWE1NTZjM2U0MDk2NGJlMDI3YmE5MDcyYzFkYTUyY2MzMWM1NzUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_345cbbc3db9c49b6b181d6284ea966ad",
+      "statement": "Unit test test_metrics_endpoint_exposes_request_count validates that the /metrics endpoint returns status 200 and contains http_requests_total after interacting with API endpoints.",
+      "evidence": [
+        {
+          "resource": "repo://tests/unit/test_api_classify.py#L39-L45",
+          "version": "repo-lines-v1:sha256:b275c83eef9551291acd9fbdc5c49151577151450156eaeadc2dabfe76e1bef0:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDYxZWRmZjQxMjU1ODcyY2Y3OGU2ZmM3ZDg3ZGJlOWJjOGQwY2Y1MGJhYjQ2NDQ2ZmNhYWU4MDExOWFlYjBkNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNWE5OWI4NmM3MzQ1ZDBmNzk4ODBjMmUyOTI4ODJiMTk1ZjIwYTcyYmFiNGYxMWQ5OWE3ZDU5OGRlOWE5YTQ0ZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZWU4NGQ2OGQwZTYzODIyN2NlY2VhZjcwYzhkNDhiNzdlZmY1MjdlNDRlYTg3N2VlYjQwMTdiZjc4YWVkMTQzMSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-24T12:24:27.905Z"
+  }
+}

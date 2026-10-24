@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:e4618422e03fda6dc50299d071c99478be75c0dd6e8d4ebcea063ad6fa077f64",
+  "claims": [
+    {
+      "id": "claim_4cf950b815bf44628fafebb8844f211b",
+      "statement": "Pytest unit test configuration in pyproject.toml defines testpaths as ['tests'] and default addopts flags -ra and --strict-markers, with dev dependencies including pre-commit, pytest, pytest-cov, and ruff.",
+      "evidence": [
+        {
+          "resource": "repo://pyproject.toml#L32-L38",
+          "version": "repo-lines-v1:sha256:e1845ed21db06f602caf14357308daff174bab2303ad19cfcc45d14e57c2144b:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOGVmYzUxMjA0YzA4YTVmZjM0MTJkYWExMmJjNWMxNzgxNGRjMDQ3ZTZiMWJjNzIwNmU0YmIzZThmM2IxNmZiNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZmQzYjZjNWI5NDQyMmE3YzA0ZjAwOTMzODFiZjhkMTcwN2U2ZWNjYTZmNzg3MzIxYTY3OTRlYTNkZjE2NDUyZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMzM1ZDdmOGRmN2Q4NDk5ZThkZWU2N2E5OGRkMDY1MTYxYTZiMTI3MjM1NzFkZTRlNTQxNjJhNDEwYTlhOTc1MSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiM2U3NmIzZTliNjkzMDk2MWIwNjdkNjYwYTFiZmZmNjcyOGY4N2JjMjVhZDYyNmJkMDg3NjJkYmY4Y2EyZGFjYSJ9"
+        },
+        {
+          "resource": "repo://pyproject.toml#L58-L63",
+          "version": "repo-lines-v1:sha256:42ceea91ad3ce6c9af23e99ab8cb9e482c0c72a8d07e383930dc229e68de875d:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTBiYjUyNzdiM2M1ZDgyOGQxM2UxMDg4M2E4NTE0NmNiMmZiOGEwYzJjMDAwZjBjNTRjYzk2YmEwZGY3MDA1OSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiY2ZhZTBkNDI0OGY3MTQyZjdiMTdmODI2Y2Q3YTUxOTI4MGUzMTI1Nzc2OTBlOTU3ODMwZDIzZGNmMzVhM2ZmZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNWEwNzdjYzNjNmYxZjJkN2JlMWQ5NTNiZjBkMzQ5ZjYxYTdlNTUxMGZlMzkyYjc3NmUyZDU4ZjdlYzE0YzE2OCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_ae65dcb07632468f82a6baf05d457955",
+      "statement": "The sample_dataframe fixture in tests/unit/conftest.py provides a 24-row DataFrame with synthetic portuguese medical texts divided equally among normal, atenção, and urgente urgency categories.",
+      "evidence": [
+        {
+          "resource": "repo://tests/unit/conftest.py#L6-L47",
+          "version": "repo-lines-v1:sha256:649c23137f79a140719eda4e606343cef944a24a2c1ecb264408715a8291558e:eyJzZWxlY3RlZExpbmVDb3VudCI6NDIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI5NzU5OTQ3MDEzYWY0MWU4MjdmYzkwMjg1Nzc3MTA2YWFmZmEyZWE4YTIyMjdmMzBkNWVhNzljM2UwODFhMjUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2N2QwYTBlY2E5NjdhOWQyNzg0ZDg5ZjdlM2M4OGY1MjdiZDI5NGYwZjUxMzVhNjg5YzgyMmY5OTY4MGU5NDkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJmNjc3ODY0NWY0MDUxNDhlZWI5ZmJkYTE5ZGU1MjcyYTkxNTAwOTdjMzY0ZDM4Mzk3Y2U3M2E1NWMzZjI3OWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c36858a6209e41b1a9ee840ed1973440",
+      "statement": "API classification unit tests in tests/unit/test_api_classify.py override the get_current_predictor dependency in FastAPI's app.dependency_overrides using FakePredictor to isolate test assertions from model disk loading.",
+      "evidence": [
+        {
+          "resource": "repo://src/medical_triage_mlops/api/main.py#L50-L65",
+          "version": "repo-lines-v1:sha256:8a9a9339e6b7e3c53fdd0af8b71e723fc430808546f5c7ad22783a801912d332:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBiZmFhODdjOTJjYzFmNDA4NjU4OWM2MGI3OTY4MDI2ZWE3NTYzYzdhM2Y2NjFhYTMxNjNiNDIzZjEzMTA1OTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM1NDEyNmRjOTY4YzRlYTg0ZTc1MTQ2Mzg4MzViMWIxZGMxY2Q1OWYxN2E0N2UzZGY5ZjA4YjYzN2RiMTdiYTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg2ZWU4ZDZiNzQzNTJiY2M4YzU1YTUwZmQ2ZjMyZWJjODE0Y2JjZGYzMGIyZTNmYWJiZTBlZTdkYTg3ZjBmNmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://tests/unit/test_api_classify.py#L7-L21",
+          "version": "repo-lines-v1:sha256:472626412f3afb0457df68edf3cc1cffb1b21986a28a1c79d7c0f95e1f7bcda2:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNjZTFjNWExYjk1YTQ5YjU2MjhiYzRkYTQ5OTBiNTQzNWUzN2ZmNzRhYmJkNjVjN2I4YWJhYTFjZTk2ODg5M2IiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdlYjcwMjU3NTkzZGEwNmY2ODJhM2RkZGE1NGE5ZDI2MGQ0ZmM1MTRmNjQ1MjM3ZjVjYTc0YjA4ZjhkYTYxYTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRiY2NlZTAzNTMwODNmY2QwYmU5NWRmZDcxN2E5NzExZjczNTk4NWZmNDlmOWUyZDQ0MjI4ODk3N2VhYWM2ZjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVkODUyMTM4NjQwZDg3Yzk1Njk1MjMxODY2MTg3ZTIyYzYzNGM0ZTJhZWJhNjQ3NWZjODYzZGQ5MjM3YTg3NmIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ff1e00063b31475faf42437fe333caed",
+      "statement": "Ruff quality enforcement in pyproject.toml targets Python 3.12, sets a line length cap of 100 characters, double quote style, space indentation, and selects rule sets E, F, I, B, and UP.",
+      "evidence": [
+        {
+          "resource": "repo://pyproject.toml#L40-L57",
+          "version": "repo-lines-v1:sha256:8a4dd23b6f924443ba00d5f6a0a1ec141ba7d7dfe73ca23fb85430e0df9b4307:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY5YjVhNTRkYTQxYzdlODAzNzI2ZGEyMTk1YmVhMTU4MWNjMmEzZGY0OGIxOTJiMWYwMDYwY2ZjNzllYWVhN2YiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdlYjcwMjU3NTkzZGEwNmY2ODJhM2RkZGE1NGE5ZDI2MGQ0ZmM1MTRmNjQ1MjM3ZjVjYTc0YjA4ZjhkYTYxYTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhlMGIyNGZjNDllOGI3ZTFkMjBlMGFkZjhiODU3MjQ3NzhkMjcwNmE3MzMwODUzZGQ3MGJkYWU5YjRjZjc5MjUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNkZWQ3MGVhYjFkMDQwZWQ2YzA2ZTAzZmE0NWI5ODU4ODMwZWFkZWQyYTJlMjRiNzg5MDI5Njk5NDkxYmNmYmQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c89db958dfe64c35b0e5cad81fe28049",
+      "statement": "Local pre-commit hooks configured in .pre-commit-config.yaml run uv run --frozen ruff check, ruff format check, and pytest to prevent committing non-compliant code without updating uv.lock.",
+      "evidence": [
+        {
+          "resource": "repo://.pre-commit-config.yaml#L1-L20",
+          "version": "repo-lines-v1:sha256:030f4357b2d02099f2003f0d7a104828e22e74d2e0996d0fb3695b4af97f6e47:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVlZTZlYjQ1NmVmYmQxZThmYWMwOWY4YzIwOWY5ZDYwNWIxM2M0MjE1NWNjYjRlNTZjN2UzNjg5YmI4NzUxNzciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFkNjg3MmQ4MjgwZTBkZTFiMzRiMGMxMDkwODY0MmYyZWI1YmUyMmRiN2FhYTAzZTlhOTE0YTRhMGFlYWU2Y2EiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ce8e1824182f4214b7a05e9eb68ce30d",
+      "statement": "The GitHub Actions CI pipeline in .github/workflows/ci.yml triggers on pushes and pull requests to main and develop, executing a lint-and-test job with uv caching and pytest coverage reporting followed by a dependent Docker build job.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/ci.yml#L3-L46",
+          "version": "repo-lines-v1:sha256:6ecf488550f28ab82b07f6b18f5482a7e7e6ba6e963e28843094d8015a07c1e8:eyJzZWxlY3RlZExpbmVDb3VudCI6NDQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM3OWZmYjI5NWM1ZjNjZjZiYmI4NTY3MWZlNDMxY2JjODE2OTI2ZWIwODc2MjdlMjU3MGRiMGUxMGU0ZjQ1YTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNiZjNmM2M3NTRhYTYyYTcxMGY0MWEzZDg2ZTJiMGQzYTAwOWFkYzA1ZWViYmRiNGIzMDRmNDFhNjQzOTFjZDMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ2ZGMwZTZlODMyODIwYjRlOWI1MjUyMmRlNGExNTRjODI4MTIwNjc2NTFjNjVjNzgzNzFiYTgzNjAyNGQxMmQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e25ba32a1bf3410c93cccaf74d3943c0",
+      "statement": "The test_onnx_convert.py test validates runtime prediction agreement between scikit-learn training pipelines and converted ONNX models executed via onnxruntime.InferenceSession.",
+      "evidence": [
+        {
+          "resource": "repo://tests/unit/test_onnx_convert.py#L11-L28",
+          "version": "repo-lines-v1:sha256:0da3eade1eb22e45932582170e7c614052e602318dc319f92a49030048f8ed3c:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjllY2RkMjcwZmEzMDc4Y2I0YWI0ODM0NmM5ZmU1NTQ0MTNkNTZjYTZlMTdiODQwZDQwZWNhOTYwNGIwNmEzZDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUyM2RkYjMxNzQ3YmRjMjcyMzQwYjc1NWUxYTg5MGI2MDkzN2Y4YjllZGM4ZjZjOWVlODcxNTk0OWE4ZGZmZDMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA5ZjZmN2Q2YTQ4YTVlYWExOWUyODMzMDZhOGUzNTRmYTMyYzM5NWMxZDBiZTcyMDhiYmJjNmM3Mjg0NWE0YTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-24T12:24:27.905Z"
+  }
+}
