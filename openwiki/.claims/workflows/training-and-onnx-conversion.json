@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:5a4eef1e1c6f7c9301f0fe0caec27284356417a04feccad0f079fbe735345d7a",
+  "claims": [
+    {
+      "id": "claim_6e8c12a39211491eab65c10ee6c931ee",
+      "statement": "scripts/train_model.py orchestrates loading the processed dataset from data/processed/dataset.csv, training the Scikit-Learn triage classifier, saving the serialized joblib model, and exporting an ONNX model graph.",
+      "evidence": [
+        {
+          "resource": "repo://scripts/train_model.py#L15-L36",
+          "version": "repo-lines-v1:sha256:c6dee39496c67b808c7a67120b7579a4b8998a41918b4c940d90ea45e4fe3c34:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVjNmFiYWE2M2RiZTQ3ZDYxZTAwM2Q0OThlZjZlMDk0YmUxY2Y2NzBkNDU0MjJkZWY5ZmNjZGZmNDFmYTJhODMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdlYjcwMjU3NTkzZGEwNmY2ODJhM2RkZGE1NGE5ZDI2MGQ0ZmM1MTRmNjQ1MjM3ZjVjYTc0YjA4ZjhkYTYxYTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIyZDQxMDhlYWZkOTEwZTQzYjRjZTUxMmYxZWFjMTE3OGNjNjE0Zjc5ZGIzOWExM2EwMGY4ZmMwZmFmZTUzMTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoyLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRhYzc1MjJlOTdiMWI3OTdmYWU0NWU1ZGY2NzVjMDI5YjhhZTA3ODg1ZGVhNjE1YTk2ODEwNGQ0YmU3MmQyN2QifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c096d1ecc19e4006a75ca6d6467c89f6",
+      "statement": "train_model in src/medical_triage_mlops/ml/train.py constructs a pipeline consisting of a TfidfVectorizer (with max_features=20_000, stop_words=\"english\", unigrams) and a LogisticRegression classifier, then fits it on a stratified train-validation split and calculates classification metrics.",
+      "evidence": [
+        {
+          "resource": "repo://src/medical_triage_mlops/ml/train.py#L15-L44",
+          "version": "repo-lines-v1:sha256:2d702e36adf94d9bec60dcb2151bf82977cb7f32faf95bea4ef2f8e06a42fff1:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI4MzQ2YTU5MjU5M2U1Njg5MTQ2NTU2ZjFjYzFkMzAyOWI2YzJkZWM4MTBmYTA4NTdiMWZiYzVhMzJjZGFkMmYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJjNmM4NTliOTNiMzc2NTE1N2U1N2Y4NWY3NDYwYWNhNmQyMDg2ZjM0ZTc0NWZiODQ1NzdlZmM2MjNkM2QwM2EiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU4MDA2NzRjN2NmNzY0YTEyNzhiMzlmYWEwOWFjMWFiZmEwNTE1ZmQwZmI1NGE4NGNlZGQyNGQ4MmYzMDQ0YzUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ1NjRkMGI1ZmNiYjkzNWMzZTk4N2Y3Mzg0NWQ1MDBjZmQ0MThkNGVmN2MzMWJiNDk3Y2E2NGVhYjM1MDZkOWMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_5417e71e9ad34db8b59c869d05d80cd9",
+      "statement": "save_model serializes the fitted Scikit-Learn pipeline to a joblib file after ensuring parent output directories exist, while load_model deserializes the saved pipeline artifact.",
+      "evidence": [
+        {
+          "resource": "repo://src/medical_triage_mlops/ml/train.py#L47-L55",
+          "version": "repo-lines-v1:sha256:43094004054019a33d0a20b32d27624e8c53760ad44ec5252e1a30d2c5bd6463:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZWZjYzBkYTQwMGEzMTcxM2Q5YzU4YjU5OTk0NzYyMGYzNjFlNmMxZDFjNzJmY2EzZGEyODQwZjRmMzc1OTkzOSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiN2ViNzAyNTc1OTNkYTA2ZjY4MmEzZGRkYTU0YTlkMjYwZDRmYzUxNGY2NDUyMzdmNWNhNzRiMDhmOGRhNjFhNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOGM3ODk1N2E1OWY4ZjM1YmY1YWY0OGJiNTQ5MjY0NjA1NTEyMjUyMDY3MjgxMGQ0ODI3MjJhOTVlYzViYTcyZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTM3OWY4MTcxNzAxOGY0ZjRjM2EyMjBlZGNiMTA1NGRjOGMwZjQxMjlmNjNkZTkwNjkyYzcxNmQ4YjQ2ODczOCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_0e09b9212f204eb6992913d6044db14a",
+      "statement": "convert_pipeline_to_onnx converts a trained Scikit-Learn pipeline to ONNX format using skl2onnx, specifying a dynamic batch string input tensor [None, 1] and disabling zipmap on the classifier to return raw class probability arrays.",
+      "evidence": [
+        {
+          "resource": "repo://src/medical_triage_mlops/ml/onnx_convert.py#L8-L21",
+          "version": "repo-lines-v1:sha256:034f94c795594585429ad5e26ee316d2fa63ad519b47b7aa3ebf454fb854a3a6:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjliMTZhYjNjNzc3MzA1Y2M0ZmViYzcwYjFkYjFiYWM1NjRhYmY2YjQ2YWYxODQ3N2Y2ZTgzMWE1ZjUwZDE3MjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNlZDE4YzY4ZjZjNzQ2MmNiZWI3MmQ3NDU2Y2JlOGFhMWYyZjQ2MmZjMGFhZDgxMGRmMGNmNTZmNjhjMDMyMWMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUzNGM2OGVhYTEyNWFjNjNiNWU4ZmQ3YTYwMDk5OTE2MzZjYTcxMDdhZmRmMzUzMTgxNjgzOWQ4ZTU3Y2M3N2QiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_1d2ba86caf024bd6bdb81134389e6955",
+      "statement": "scripts/measure_latency.py benchmarks inference latency between SklearnPredictor and OnnxPredictor across 10 warmup runs and 200 measured iterations on a batch of sample clinical texts, calculating mean, median, and P95 latency statistics.",
+      "evidence": [
+        {
+          "resource": "repo://scripts/measure_latency.py#L15-L50",
+          "version": "repo-lines-v1:sha256:634424c3bab14922db7543a5957a7bad94f48b7e227a9154f183ec7a120e7042:eyJzZWxlY3RlZExpbmVDb3VudCI6MzYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdlYTk2ZGM3NTUwOTYyZmU1NzExZmUyNmU2MmYyNjM1NDRjNzc2OTU1ZjYwMzZiYjZiN2Q3ZDRjNjUxOGM1ZTYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE0MTlhNmRjYzA0ZTIxM2EzYzdhNzdhNDU2YjAxZTc2ZDFlZjc4Y2QwMGJiZWMxZDhmODE0NThmZTkzZWRjNTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc0NGU2ZTYxZjY2NGYyY2ZkMTNlNjI3ZWFiMzYwYjI3YTRiMjEzOTBiMjNiNzBiMWQ1Mzk4YmQzYjk3N2RjZDMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZlMGRkODcyMmI5YjA0N2JlODI4NzA0YzJiNmE5YzYxMGViMGE0ZDdiM2FjMDYyMmU3YzkzM2EyYjkwYzgzOTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_daaad47d57d149299fc75d18ed8bc593",
+      "statement": "Benchmark results recorded in reports/latency/latency_comparison.md demonstrate that ONNX Runtime reduces mean inference latency from 0.947 ms (scikit-learn) to 0.373 ms, yielding a 2.54x speedup over the scikit-learn backend.",
+      "evidence": [
+        {
+          "resource": "repo://reports/latency/latency_comparison.md#L1-L10",
+          "version": "repo-lines-v1:sha256:f20c5e471b22092c0f3ef330650656422cae8809d290b13d0ea61a22e5516191:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhYjg5YzM2MTY0MzczZGExYTJjYTk2ODIyMmQ4ZGI4MDhjNmU5MzFiNWI3ZjU2ZmRjYWIxOTA0MzNmNWFkZjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVjNWM2NmUxNjBkYTA1MGM0ZTgwMzFmYTFiN2U4NmIzZmJhY2FmYTMxMDU2OGQ2ODQxYWNjOTUxZDNkZDZjZjgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://scripts/measure_latency.py#L60-L86",
+          "version": "repo-lines-v1:sha256:30f8a21284e3863ccb7bd0dd81cdbc625d7a2b3af3a008f353efb80128e4e3c5:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEwZTVkMWI2YTZjZjViZjJhY2ZlZjU1ODhmMjc5MTk3ZDUxYTk1Mjc2NTM3N2U3ODkwNDBkOWE4N2QwMjY0MjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc3OGYxOGRmNTFlZTZjMTUwNTJkMzc3YjZlM2FkM2RkMGNlOGM3ODE4YmQ3ZWU5OTk5MzU5YzlkOTgyMDliYzQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJiYmM2MTJiMDc0MDMxNjBlNDBlYWNmYTMxNTdmOWQxZGM5OGM0ODA3YzRhNTA0M2ZkZmI1NTQ5NGUwMGQ4MDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ2ZDQzNGUzNmJhMDRhZDhjMjBiYWE4YWMzNzVjOGQ5NjU5YWJmODc5ZWM2OGMzYjIzZmQ2NjRlMDQ1NmQ5ZGEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_f849aab2c6cc41e9a3577c0155b2f4c7",
+      "statement": "OnnxPredictor aligns ONNX Runtime class probability outputs with target urgency labels by using Scikit-Learn's deterministic sorted label ordering sorted(URGENCY_LABELS).",
+      "evidence": [
+        {
+          "resource": "repo://src/medical_triage_mlops/ml/inference.py#L32-L53",
+          "version": "repo-lines-v1:sha256:771bf47a8c41c70e863263894a229879a4114a7d86fcc87c644582d38fa1d789:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJkZmExNmExOTk4NjY2MWQ4Y2MwM2IxYmU3ODM2NzNjYTg3MTI5MWU4YzU3OWFiZjU0MmMwNzQyOTc2YjY3ZjgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdlYjcwMjU3NTkzZGEwNmY2ODJhM2RkZGE1NGE5ZDI2MGQ0ZmM1MTRmNjQ1MjM3ZjVjYTc0YjA4ZjhkYTYxYTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRiMzBhNTA4NmYwNGY2YmViYjRmMWI4MmM4MjAxN2VhZGY1ZGViZWY4MDY2ZmU2OWNlYTZkMzljZTgzNDUxM2IiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFlNjJhNDEzMTJkNTEzMWZmOTA4MWIyNjFhZmY4YWU4ODcyNjczZTExYTExNDkzZWU3YzQzODkxZGI0NTA5YmIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c4b9892a10f947e698ea881a0e93cac2",
+      "statement": "Unit tests in tests/unit/test_train.py and tests/unit/test_onnx_convert.py verify that model fitting, joblib serialization roundtripping, and ONNX conversion produce correct predictions and matching outputs between Scikit-Learn and ONNX Runtime.",
+      "evidence": [
+        {
+          "resource": "repo://tests/unit/test_onnx_convert.py#L11-L28",
+          "version": "repo-lines-v1:sha256:0da3eade1eb22e45932582170e7c614052e602318dc319f92a49030048f8ed3c:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjllY2RkMjcwZmEzMDc4Y2I0YWI0ODM0NmM5ZmU1NTQ0MTNkNTZjYTZlMTdiODQwZDQwZWNhOTYwNGIwNmEzZDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUyM2RkYjMxNzQ3YmRjMjcyMzQwYjc1NWUxYTg5MGI2MDkzN2Y4YjllZGM4ZjZjOWVlODcxNTk0OWE4ZGZmZDMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA5ZjZmN2Q2YTQ4YTVlYWExOWUyODMzMDZhOGUzNTRmYTMyYzM5NWMxZDBiZTcyMDhiYmJjNmM3Mjg0NWE0YTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://tests/unit/test_train.py#L8-L26",
+          "version": "repo-lines-v1:sha256:0e8092ac6af53ed6f6cb6faab7369dc81aac12a7afdd2a305d865d526fe883cd:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUxY2EwMDQzZGM5ODEyMTJmZjUyNTliNGJiZTkzYmVlMGJkNzA0MTBkN2MzMGM0ZDhlOGRmYTkxMmM5MzVmNjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA2NmQyMGExYTZiNzFmMGRiZThkMDNmMjAwY2NkYmIxNjY0OTc1ZmM5MjM0YTE1NjZmNTVlZGY3MDBmZDU0MmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZlYWYwMWE4YzI4ZGE1MmJmNDFhYWNkODg0Nzc1ZTM5YmM3NzliNzRiMWI2Y2UzNTAxMWI4MjY3ZTIzOGE3NmYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-24T12:24:27.905Z"
+  }
+}

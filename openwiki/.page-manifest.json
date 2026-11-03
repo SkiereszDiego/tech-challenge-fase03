@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "pages": {
+    "/openwiki/architecture/overview.md": {
+      "pageVersion": "sha256:9ca9fa6649da7bff4b1a8ffdb6d1838dc6acbef5bba9b0e8ea614efb6351941f",
+      "completedBy": "openwiki/0.7.2",
+      "completedRunId": "a58a5789-63ea-452a-a872-e467931a6b93",
+      "gitHead": "864f2e3de36d9953026787329c54b54198e1503e",
+      "sourceFingerprint": "sha256:51b37d7b9028190ca7ebebb74543cdb308d30d5c7b8836a48057738c0dd07c4f"
+    },
+    "/openwiki/concepts/data-and-urgency-mapping.md": {
+      "pageVersion": "sha256:35a372ace1d8b65b9b028bb3b5b41a89c48b8a727b1acadaf55b84038f2f4bd6",
+      "completedBy": "openwiki/0.7.2",
+      "completedRunId": "a58a5789-63ea-452a-a872-e467931a6b93",
+      "gitHead": "864f2e3de36d9953026787329c54b54198e1503e",
+      "sourceFingerprint": "sha256:51b37d7b9028190ca7ebebb74543cdb308d30d5c7b8836a48057738c0dd07c4f"
+    },
+    "/openwiki/concepts/inference-and-serving.md": {
+      "pageVersion": "sha256:8b08206e1df7803deca7f2667bfed1d79e099650933933f2361afdec51c6414b",
+      "completedBy": "openwiki/0.7.2",
+      "completedRunId": "a58a5789-63ea-452a-a872-e467931a6b93",
+      "gitHead": "864f2e3de36d9953026787329c54b54198e1503e",
+      "sourceFingerprint": "sha256:51b37d7b9028190ca7ebebb74543cdb308d30d5c7b8836a48057738c0dd07c4f"
+    },
+    "/openwiki/operations/monitoring-and-telemetry.md": {
+      "pageVersion": "sha256:cb1270a5803d06f885159b1ccb105daa1794dc8b73e894a997ee58c75550955c",
+      "completedBy": "openwiki/0.7.2",
+      "completedRunId": "a58a5789-63ea-452a-a872-e467931a6b93",
+      "gitHead": "864f2e3de36d9953026787329c54b54198e1503e",
+      "sourceFingerprint": "sha256:51b37d7b9028190ca7ebebb74543cdb308d30d5c7b8836a48057738c0dd07c4f"
+    },
+    "/openwiki/quickstart.md": {
+      "pageVersion": "sha256:75541bee104d6f38458487dda1e2d1256e7402dceffd5163f49c1dbbc0170359",
+      "completedBy": "openwiki/0.7.2",
+      "completedRunId": "a58a5789-63ea-452a-a872-e467931a6b93",
+      "gitHead": "864f2e3de36d9953026787329c54b54198e1503e",
+      "sourceFingerprint": "sha256:51b37d7b9028190ca7ebebb74543cdb308d30d5c7b8836a48057738c0dd07c4f"
+    },
+    "/openwiki/testing/test-suite.md": {
+      "pageVersion": "sha256:e4618422e03fda6dc50299d071c99478be75c0dd6e8d4ebcea063ad6fa077f64",
+      "completedBy": "openwiki/0.7.2",
+      "completedRunId": "a58a5789-63ea-452a-a872-e467931a6b93",
+      "gitHead": "864f2e3de36d9953026787329c54b54198e1503e",
+      "sourceFingerprint": "sha256:51b37d7b9028190ca7ebebb74543cdb308d30d5c7b8836a48057738c0dd07c4f"
+    },
+    "/openwiki/workflows/airflow-orchestration.md": {
+      "pageVersion": "sha256:452d3f40ff21dfb3b5781892bda016fd55c45b56a106a252129b9f5856c9fd9d",
+      "completedBy": "openwiki/0.7.2",
+      "completedRunId": "a58a5789-63ea-452a-a872-e467931a6b93",
+      "gitHead": "864f2e3de36d9953026787329c54b54198e1503e",
+      "sourceFingerprint": "sha256:51b37d7b9028190ca7ebebb74543cdb308d30d5c7b8836a48057738c0dd07c4f"
+    },
+    "/openwiki/workflows/training-and-onnx-conversion.md": {
+      "pageVersion": "sha256:5a4eef1e1c6f7c9301f0fe0caec27284356417a04feccad0f079fbe735345d7a",
+      "completedBy": "openwiki/0.7.2",
+      "completedRunId": "a58a5789-63ea-452a-a872-e467931a6b93",
+      "gitHead": "864f2e3de36d9953026787329c54b54198e1503e",
+      "sourceFingerprint": "sha256:51b37d7b9028190ca7ebebb74543cdb308d30d5c7b8836a48057738c0dd07c4f"
+    }
+  }
+}

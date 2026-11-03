@@ -46,7 +46,8 @@ O objetivo é disponibilizar um modelo de classificação de textos médicos por
 tech-challenge-fase03/
 ├── .github/
 │   └── workflows/
-│       └── ci.yml
+│       ├── ci.yml
+│       └── openwiki-update.yml
 ├── airflow/
 │   ├── dags/
 │   │   └── medical_triage_training_dag.py
@@ -56,6 +57,8 @@ tech-challenge-fase03/
 ├── data/
 │   ├── processed/
 │   └── raw/
+├── docs/
+│   └── openwiki-visualizer/
 ├── models/
 ├── monitoring/
 │   ├── grafana/
@@ -89,12 +92,20 @@ tech-challenge-fase03/
 │       │   └── inference.py
 │       └── monitoring/
 │           └── metrics.py
+├── openwiki/
+│   ├── architecture/
+│   ├── concepts/
+│   ├── operations/
+│   ├── testing/
+│   ├── workflows/
+│   └── quickstart.md
 ├── tests/
 │   └── unit/
 ├── .env.example
 ├── .gitignore
 ├── .pre-commit-config.yaml
 ├── .python-version
+├── AGENTS.md
 ├── docker-compose.yml
 ├── Dockerfile
 ├── pyproject.toml
@@ -337,6 +348,61 @@ O workflow `.github/workflows/ci.yml` roda em todo push/PR para `main` e `develo
 1. **lint-and-test**: `uv sync` → `ruff check` → `ruff format --check` → `pytest --cov` (sem acesso à rede — os testes usam dados sintéticos, não o dataset real do Kaggle).
 2. **build**: build da imagem Docker da API (`docker build .`), condicionado ao sucesso do job anterior.
 
+## Documentação técnica (OpenWiki)
+
+O repositório tem uma wiki técnica gerada automaticamente pelo [OpenWiki](https://www.npmjs.com/package/openwiki) a partir do código-fonte, em `openwiki/`. Cada afirmação das páginas aponta para os arquivos do repositório que a sustentam (`sources` no cabeçalho de cada página). Os registros dessas evidências ficam em `openwiki/.claims/`.
+
+Comece por [`openwiki/quickstart.md`](openwiki/quickstart.md), que traz o onboarding e um mapa de "qual arquivo mexer para cada tarefa". As demais páginas:
+
+| Seção | Página |
+|---|---|
+| Arquitetura | [Architecture & System Overview](openwiki/architecture/overview.md) |
+| Conceitos | [Data Pipeline & Urgency Mapping](openwiki/concepts/data-and-urgency-mapping.md) |
+| Conceitos | [Inference Engine & API Serving](openwiki/concepts/inference-and-serving.md) |
+| Workflows | [Model Training & ONNX Optimization Workflow](openwiki/workflows/training-and-onnx-conversion.md) |
+| Workflows | [Airflow Workflow Orchestration](openwiki/workflows/airflow-orchestration.md) |
+| Operações | [Monitoring & Telemetry Stack](openwiki/operations/monitoring-and-telemetry.md) |
+| Testes | [Test Suite & Quality Assurance](openwiki/testing/test-suite.md) |
+
+### Visualizador
+
+`docs/openwiki-visualizer/` é uma exportação estática que mostra a wiki como um grafo navegável. Como a página carrega `graph.json` via `fetch`, ela precisa ser servida por HTTP (abrir o `index.html` direto do disco não funciona):
+
+```bash
+uv run python -m http.server 8001 --directory docs/openwiki-visualizer
+```
+
+Depois acesse `http://localhost:8001`.
+
+### Atualização automática
+
+O OpenWiki faz parte da esteira. O workflow `.github/workflows/openwiki-update.yml` roda:
+
+- a cada push em `main` ou `develop`;
+- diariamente às 08:00 UTC;
+- manualmente, via *workflow_dispatch*.
+
+Em cada execução:
+
+1. Se o repositório ainda não tiver wiki (`openwiki/index.md` ausente), roda `openwiki code --init` e documenta o projeto do zero. Caso contrário, roda `openwiki code --update`, que documenta só o que mudou desde a última execução.
+2. Regenera o visualizador em `docs/openwiki-visualizer/`.
+3. Abre ou atualiza um PR `docs: update OpenWiki (<branch>)` na branch `openwiki/update-<branch>`. A documentação nunca é commitada direto em `main`/`develop`.
+
+Pushes que só alteram `openwiki/` ou `docs/openwiki-visualizer/` não disparam o workflow. Assim, o merge do PR da wiki não inicia um novo ciclo.
+
+A wiki é gerada com o Gemini (`OPENWIKI_PROVIDER: gemini`, modelo `gemini-3.6-flash`). Para funcionar, o repositório precisa do secret `GEMINI_API_KEY` (chave do Google AI Studio) e da opção *Settings → Actions → General → Allow GitHub Actions to create and approve pull requests* ativada. Os secrets da LangSmith são opcionais.
+
+Outros repositórios podem reutilizar o mesmo workflow:
+
+```yaml
+jobs:
+  openwiki:
+    uses: SkiereszDiego/tech-challenge-fase03/.github/workflows/openwiki-update.yml@main
+    secrets: inherit
+```
+
+> As páginas em `openwiki/` são geradas: não edite à mão. Altere o código ou a documentação de origem e deixe o workflow regenerar. As orientações para agentes de IA estão em `AGENTS.md`.
+
 ## Qualidade de código
 
 O projeto utiliza Ruff para lint e formatação, além do Pytest para os testes automatizados.
@@ -484,6 +550,7 @@ Essa escolha prioriza serviços gerenciados (menos operação); as próximas eta
 - [x] Configurar o dashboard do Grafana (3 painéis, provisionado automaticamente)
 - [x] Converter o modelo para ONNX
 - [x] Comparar a latência dos modelos (sklearn vs. ONNX, `scripts/measure_latency.py`)
+- [x] Gerar a wiki técnica com OpenWiki e automatizar sua atualização (`openwiki-update.yml`)
 
 ### Próximos passos
 

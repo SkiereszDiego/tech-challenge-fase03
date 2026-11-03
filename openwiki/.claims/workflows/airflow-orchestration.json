@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:452d3f40ff21dfb3b5781892bda016fd55c45b56a106a252129b9f5856c9fd9d",
+  "claims": [
+    {
+      "id": "claim_b37495b4679e43bf921d3b6076e9ae3b",
+      "statement": "The medical_triage_training DAG orchestrates retraining using a four-task sequence: ingest_data, preprocess_data, train_model, and convert_to_onnx.",
+      "evidence": [
+        {
+          "resource": "repo://airflow/dags/medical_triage_training_dag.py#L56-L69",
+          "version": "repo-lines-v1:sha256:32da4c00524ad6cc2834dc42a595ef6674d4e1c197ac999782e556069a22aee6:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJjOTY2MTc1NzJhMWYzNDVmOGY3YWY0MjY2Nzc3ZWM5ODhiNzg4MzMxNjExMWE0ZWNmMzE4NWY1MDczODZmNWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNiNmY5MmQxM2Y4YzMyOTQ3ZDQwYTZiYjIxYmIzNmRkYTI4NjQ2OTA2YjUyOGM3MWE5NGQ3YTc4NzU5OTk0ZGIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFlZWVhNTk2YzU5OGJhZGFmNjQxNmIyNWFmYTBlMzQzMjZmNzhlYWI5ZjVjZGMzYTkzMDkyZDY5NDU4MWJjOGUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ebaf26254fd949e483d3d45725452f07",
+      "statement": "The Airflow service is deployed via Docker Compose running in standalone mode on Apache Airflow 2.10.3 with Python 3.12, exposing port 8080 and adding /opt/airflow/project/src to PYTHONPATH.",
+      "evidence": [
+        {
+          "resource": "repo://airflow/Dockerfile#L1-L4",
+          "version": "repo-lines-v1:sha256:380a3bad1188260e6156d9243392f524fceebe79f9b62eb14b4a8dc25bbd4cb4:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDFkZDM4NmVkNjY4YTEyYjA3M2I5OGY4MzIwM2E2MGRiMDliNmZlODY5ODEzMjY3MDA2NTEzNTJlMWIwNGU1MiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjY0YzQ3MGJhZjA5MGNmZjMwYjY0YTU2Njc3YzYxZDg5Yjg3MWJlOTljMTIyY2JjMmYwNTcwODVmZTE1YTMyNCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://airflow/docker-compose.yml#L1-L17",
+          "version": "repo-lines-v1:sha256:8e65518433751409670c0a38a6f8ea92679ed8960430d093c005a8629fc2d2b5:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZjZmVlYWJkODk2ZDhlYzU0OGQzOWI0NzUyNGEzOGFhZDU5MWM3ZGZlMWRhYzQzNGJkYzBhZDIzNzAyZDlmZDgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAwMTI3YWZmZTY4ZTFjNzEyMjBiNmQ0Y2Y3OWE1NTZjM2U0MDk2NGJlMDI3YmE5MDcyYzFkYTUyY2MzMWM1NzUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_a73d11d64793458bbecb0075605ce33c",
+      "statement": "Airflow volume mounts map host directory src as read-only, while mapping data and models host directories to /opt/airflow/project/ for data and artifact persistence.",
+      "evidence": [
+        {
+          "resource": "repo://airflow/dags/medical_triage_training_dag.py#L17-L22",
+          "version": "repo-lines-v1:sha256:09bbba2d36c12527f527c588d468f06c53c98f119ffc38bcbfe48cc682d70b5c:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTUwOTE1ZTU4NDQ3NDkzNWRhYjQwNTk5NjIxODk0OTIxZWJlYTliNzk3ZmIxOThhODFiNDAyYzlmMzgwMzJhYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiN2ViNzAyNTc1OTNkYTA2ZjY4MmEzZGRkYTU0YTlkMjYwZDRmYzUxNGY2NDUyMzdmNWNhNzRiMDhmOGRhNjFhNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzNkYzk4NDgwNTdjZWU3OWFiMDFiMjVlOTE1MDk1ZTM5NWJkN2Q5YTcyM2UxYzcyOTMzZTdkYzI4ZGMzZGM0MiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTY4YmYxYTVhNjRjZWQzOTE5YTU4MTAzMjM0NTEyMjZmMTk0ZTM5YzI3OTliZGRmMDZmMzc4MGMxZjQ5NWM1ZCJ9"
+        },
+        {
+          "resource": "repo://airflow/docker-compose.yml#L12-L16",
+          "version": "repo-lines-v1:sha256:cf85d4987f3b51253f7d70b15f43526c4fd25889b56aa219610597b7c7fb4129:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiM2FlZDQyMTZjMTZmNjExNWNlZTNmZDhmMGNiZDU0NjRhMWZlZWNlNTM1YzkwNTcxZTJhNjM4ZDdiYmIxZjY0YSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTkwZGM1YzhiOGRhODM2MTJlMjRmNDc4MTk3ODI0ZWIxMTRkODc5YzkwNWJmNTY0MWIxMDBmMmJlNGRmZTYwNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiN2I0ZjAzYmE5OGJhNWUwYjk4MzhmYWNmYTYxODcxNzlkNmQ4YjgwMzNkNjFjMDM4ZWU4MGM5ZWJkNDEyMjNmMSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDAxMjdhZmZlNjhlMWM3MTIyMGI2ZDRjZjc5YTU1NmMzZTQwOTY0YmUwMjdiYTkwNzJjMWRhNTJjYzMxYzU3NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_2af123cb85884e15a05b049e8a8e5ef2",
+      "statement": "Dependency versions in airflow/requirements.txt match pyproject.toml to ensure model serialization compatibility between Airflow retraining and API serving runtimes.",
+      "evidence": [
+        {
+          "resource": "repo://airflow/requirements.txt#L1-L9",
+          "version": "repo-lines-v1:sha256:db7dddaa6ebb63c90fff506596b509689075466041a45e9c1bcc7fc4c60ff9a5:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDA4NDgyNTEwODc5MGJiZjAwYzA5ZjFmYTBkNDYwYmY5MDc1ZjYyYmVjZjUwNWI4NjYzMzliNDMwNjMzNTY4NyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOGFlNjFhMWRmZmYwZGUwZjFhMWIzMzI1NDFiMmE0ZDM0ODg2NzNiNTYyY2ZiMjA4YTY0NTU0ZmU3NzcwZGUxYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://pyproject.toml#L10-L23",
+          "version": "repo-lines-v1:sha256:981a8090ee0051b9627e0cca731568f64d996675d7dc6aa0acb533c1d80229d9:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZmYjU3MTA3OWMyYzM0YTYyYjFjMDA2MmY2YjM4OWFkNjZiMTQ1ZjFkYTY1MmVkZjI0ZDc0NDdkNTM2M2RhMmYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZkM2I2YzViOTQ0MjJhN2MwNGYwMDkzMzgxYmY4ZDE3MDdlNmVjY2E2Zjc4NzMyMWE2Nzk0ZWEzZGYxNjQ1MmQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRhYmFkMzQ4NGVhNDllZDY5Y2FiODc2ZTJjNjMwOWQxYTQyZWIxN2I4NDJlMmZjNzQxNDAxY2EyN2M1M2QwZTgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjlmZjNhNDAxZjU3ZGQ0Mjc4NDgyNjEzOWRiYTY3NTFkNTVkOTE3MGUwMWVjZmFlMTk2YTllZWYwMjM2YjQ0NjYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_fce3a1e4e99b44568867de65ef4bae25",
+      "statement": "The ingest_data task downloads Kaggle abstracts using shutil.copyfile to /opt/airflow/project/data/raw/, and preprocess_data maps disease condition labels to urgency tiers to export /opt/airflow/project/data/processed/dataset.csv.",
+      "evidence": [
+        {
+          "resource": "repo://airflow/dags/medical_triage_training_dag.py#L24-L35",
+          "version": "repo-lines-v1:sha256:038f77693f288b3ebc191b0055da283763c8a634c786c66ff9d562c749df4cfd:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVhMmIxYmM2Y2Q2ZWE1MjZhZGQ0MjE1NTMzYzBiYjFiNjgzNjc1ZDQ1YWI2ZWU4NjIzZDkxNzY5OThjMjk2YzciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdlYjcwMjU3NTkzZGEwNmY2ODJhM2RkZGE1NGE5ZDI2MGQ0ZmM1MTRmNjQ1MjM3ZjVjYTc0YjA4ZjhkYTYxYTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhmZDdmNDRkNDFlNjVmNTNkZmI4MWRjMGFhMjA4NWUzNjQ5Mzk1MWJiNGZkNDA3YjFhYWYxMjVjNjFhMjJjZTIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ1NjAxMzQxZmJmODI2ZWQwNGY2YjQxZTFhZjk4NWVhNTQyYzM5ZDk3MmRkY2RkMGExNWEyODFlZWU1YTUyYTgifQ"
+        },
+        {
+          "resource": "repo://src/medical_triage_mlops/ml/data.py#L18-L68",
+          "version": "repo-lines-v1:sha256:50b051bfa9244c67cf1f7f3de5188fa9b59a4d6c4e9b746328a21132fe86ec76:eyJzZWxlY3RlZExpbmVDb3VudCI6NTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU5NzMzNWE2MTJmMGM3ZTkwZjNkZGRiZDA1NTQ3NmU0MWRlY2E1N2FhMjQ2MDljMGE1NmI3YmU3YzQ2MmMwNTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEzZGQ0NTUxZTZjMGJkYzY4YTNhNDVkOTI4N2FlYWIwOGQ3ZDBiNzRlNzFmNGFlZWQ3MjUyOTYzM2Y0YmIyMzUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE1MmQ2ZmRlNGY3YTUyZGE1NTcxZTg1OWYzMWMzZTEwNWJhNzUyZWQ0NTExYTEyZTg2NGZhMjY2NzdjZmVjZTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_246423c299814c3cb138854374fe90ba",
+      "statement": "The train_model task fits a TF-IDF and Logistic Regression pipeline saving models/model.joblib, which convert_to_onnx converts into models/model.onnx using skl2onnx.",
+      "evidence": [
+        {
+          "resource": "repo://airflow/dags/medical_triage_training_dag.py#L37-L54",
+          "version": "repo-lines-v1:sha256:31d5047b7ea96b8cdadb107f409d7f76e9d1564d3f482ba530a3bbeb600761c8:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRlOTU5ZDM4ZTk3Y2MxZDlmMmRiNTlhZDk2MTAzMWQ2ODUyZjg2MTUzZTI1OTYwYTg5M2FkNjllMGUwYWJjNjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdlYjcwMjU3NTkzZGEwNmY2ODJhM2RkZGE1NGE5ZDI2MGQ0ZmM1MTRmNjQ1MjM3ZjVjYTc0YjA4ZjhkYTYxYTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNhMDY0ZmRmZTE1OGY2YWQyYjY5YTliODlmODQzYTBlMDlhYWVhNzU4MTUxMjA1MWFhMjYwNWY5YTAzZmQxOGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjMxMDZmNjg1MWRjNDIxNDBhYmY4ZmU2ZTdiMWI3MDVmYWI4MTljYTJjMzc2MDM1MzQxNjg1MmFkN2I2NDkyYjYifQ"
+        },
+        {
+          "resource": "repo://src/medical_triage_mlops/ml/onnx_convert.py#L8-L21",
+          "version": "repo-lines-v1:sha256:034f94c795594585429ad5e26ee316d2fa63ad519b47b7aa3ebf454fb854a3a6:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjliMTZhYjNjNzc3MzA1Y2M0ZmViYzcwYjFkYjFiYWM1NjRhYmY2YjQ2YWYxODQ3N2Y2ZTgzMWE1ZjUwZDE3MjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNlZDE4YzY4ZjZjNzQ2MmNiZWI3MmQ3NDU2Y2JlOGFhMWYyZjQ2MmZjMGFhZDgxMGRmMGNmNTZmNjhjMDMyMWMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUzNGM2OGVhYTEyNWFjNjNiNWU4ZmQ3YTYwMDk5OTE2MzZjYTcxMDdhZmRmMzUzMTgxNjgzOWQ4ZTU3Y2M3N2QiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/medical_triage_mlops/ml/train.py#L27-L54",
+          "version": "repo-lines-v1:sha256:4a533a262569d5d7118467925f152e80897e67021ec5bd42c6b8371769491cd0:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZmMjA3MmE0ODhmZDYxMWNiOWM4OWYxN2Y4NzQzNjA3MzM3OTkzYTgzNjlmNjY4MmZlNjcyNDZkMWE5OGNjYWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAyOWNiMzUzY2IyMmZjNDE2NDUzZWEyZWYwMzRjY2UxMTMxZDM4M2E5YTM4ZDdmZTNmNjVlYTlhMTc5M2M3N2EiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhiOTc0ZGE0MDg2MzJhNGFhN2UyYWU4MGI4NjAzOTFhM2RjZDgyMTFjNzllY2FkN2NhOGU5NTEyOGIwMDE4MzIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZlMGRkODcyMmI5YjA0N2JlODI4NzA0YzJiNmE5YzYxMGViMGE0ZDdiM2FjMDYyMmU3YzkzM2EyYjkwYzgzOTUifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-24T12:24:27.905Z"
+  }
+}

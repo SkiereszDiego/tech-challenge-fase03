@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:9ca9fa6649da7bff4b1a8ffdb6d1838dc6acbef5bba9b0e8ea614efb6351941f",
+  "claims": [
+    {
+      "id": "claim_2f0eeedb9a7b4ddc99fdd2522e700db9",
+      "statement": "FastAPI provides /classify, /health, and /metrics REST endpoints, managing model predictor initialization via application lifespan context and returning HTTP 503 when model artifacts are missing.",
+      "evidence": [
+        {
+          "resource": "repo://src/medical_triage_mlops/api/main.py#L16-L65",
+          "version": "repo-lines-v1:sha256:4d0a16a5ac7f261cb829ebb2ce3c1e66ffcd29a7e407c68014ada7f27ca1487c:eyJzZWxlY3RlZExpbmVDb3VudCI6NTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNiY2M0NDVlYmQyMGQ1ZGYyYjlhMWY3M2JjODdmNjQyZWQ1MTcyYmFmNzc3NzAxNzJhNTczNzJhMTQxOGVlOWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM1NDEyNmRjOTY4YzRlYTg0ZTc1MTQ2Mzg4MzViMWIxZGMxY2Q1OWYxN2E0N2UzZGY5ZjA4YjYzN2RiMTdiYTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRmNTIxOGRkNWVjM2EwZmIyNjRhNzQ1MDYyMjc0YzhhYTE0M2NjYTVmNjFlMWU3ZDdkY2IyMTBiMzJiYTEzMjQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_bf4490df497f4bdfa15c16d07917ed9e",
+      "statement": "The inference engine decouples model execution behind a structural Predictor protocol, providing SklearnPredictor and OnnxPredictor implementations selected via the MODEL_BACKEND setting.",
+      "evidence": [
+        {
+          "resource": "repo://src/medical_triage_mlops/ml/inference.py#L11-L69",
+          "version": "repo-lines-v1:sha256:17f4ac197884b0dfba60982e3bcf08632a21e44c87929eade9e3a5b07a0c7c13:eyJzZWxlY3RlZExpbmVDb3VudCI6NTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVkNzBiNmYxNjkzY2RiMzU5YmUzNDg4MTA1ZGZhOGI2ZmU1NmRlOTcyY2U1NDZjNGY3MWFhMzg1NGZlMTI1YTgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUxNzQzY2JkMmIzOWRjNWFkMjc2NWY1MzlkNGJlOWE5NjQyMWFjNjQyMTFhZmQ1NWQ2YzVhM2UyM2VlZDliYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdlYmMxNzhlOWMzYTRiMjhiZDllNzMzYzAxZDUyMWQ3M2Y4YmFlZjQ0ZGJlM2I3MDQ1ZTNhNWFlYTBjMTQwY2UiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_5022f0f236154c81977bc330e7a63e4f",
+      "statement": "OnnxPredictor explicitly enforces class label ordering using sorted(URGENCY_LABELS) to maintain output probability alignment with Scikit-Learn's default classes_ sorting.",
+      "evidence": [
+        {
+          "resource": "repo://src/medical_triage_mlops/core/labels.py#L10-L15",
+          "version": "repo-lines-v1:sha256:068d1b11ebdf28d741946efb8a9231555720447cbde198291dc64bfdd941893c:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDhjZDcxOWJjNjI4YTZhZWYyMTBlMWU5ZWI0NDIwMWU0MmM4ZTU1ZjNkMDdlZTU1M2JiZTg0ZTdhM2JlNWVmZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiN2ViNzAyNTc1OTNkYTA2ZjY4MmEzZGRkYTU0YTlkMjYwZDRmYzUxNGY2NDUyMzdmNWNhNzRiMDhmOGRhNjFhNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDlkYzlkOWJiM2QxN2ExMjY2YzgyMjlmOGZhZTFkYmQ5MjA5YTVkY2FlNmJhNzEyM2Y5NTZjZTcyZmZhYTM0MiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDk0Yzg3NDIwY2FjYjZkNjkwMGFkMWNmMWZjOGMwZmQ4MzNkMGNjNTNiMTQxMWU3Yzk5M2M5ZDgwMjViN2ViZiJ9"
+        },
+        {
+          "resource": "repo://src/medical_triage_mlops/ml/inference.py#L32-L53",
+          "version": "repo-lines-v1:sha256:771bf47a8c41c70e863263894a229879a4114a7d86fcc87c644582d38fa1d789:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJkZmExNmExOTk4NjY2MWQ4Y2MwM2IxYmU3ODM2NzNjYTg3MTI5MWU4YzU3OWFiZjU0MmMwNzQyOTc2YjY3ZjgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdlYjcwMjU3NTkzZGEwNmY2ODJhM2RkZGE1NGE5ZDI2MGQ0ZmM1MTRmNjQ1MjM3ZjVjYTc0YjA4ZjhkYTYxYTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRiMzBhNTA4NmYwNGY2YmViYjRmMWI4MmM4MjAxN2VhZGY1ZGViZWY4MDY2ZmU2OWNlYTZkMzljZTgzNDUxM2IiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFlNjJhNDEzMTJkNTEzMWZmOTA4MWIyNjFhZmY4YWU4ODcyNjczZTExYTExNDkzZWU3YzQzODkxZGI0NTA5YmIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_01d87477a48442ea98d0bba42f5f03de",
+      "statement": "Centralized settings in Settings use pydantic-settings to load configuration parameters from environment variables or .env files, cached via @lru_cache in get_settings().",
+      "evidence": [
+        {
+          "resource": "repo://src/medical_triage_mlops/core/config.py#L7-L24",
+          "version": "repo-lines-v1:sha256:4ec5e86b4acbc1d281c8d69ec477ba0224d4433d179dc9728a840d1855a6726e:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUzOGFlZWYzNjdhODkyMGY5YzE5ZmFjYWFlOGE4ZmIyYWViMzAwNGQ0NGJlZTZiZjI2ZjFmNWIwMWExNjk5MGUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBkNzk1ZGRkOGFkYTA5N2M1OThiMjJjM2VlYzljYjc2MWFhYjAyYWFjZGI0NTJiM2ZiMzk4MzMwYjcxZGRiNWMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg5MDYwOWJiOTE3ZjU3MzlmNzJkZmIzMzM3YTViODgwYWRkN2YxNjAwYmIzMmQ2N2I1NmI2NTU3ZjE0ODgxM2YiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_bd9fa8bd672e456487ef796279464c8c",
+      "statement": "The training pipeline fits a TF-IDF Vectorizer and Logistic Regression model, serializes it to joblib format, and exports an ONNX model graph via skl2onnx with zipmap disabled for raw probability output.",
+      "evidence": [
+        {
+          "resource": "repo://src/medical_triage_mlops/ml/onnx_convert.py#L8-L21",
+          "version": "repo-lines-v1:sha256:034f94c795594585429ad5e26ee316d2fa63ad519b47b7aa3ebf454fb854a3a6:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjliMTZhYjNjNzc3MzA1Y2M0ZmViYzcwYjFkYjFiYWM1NjRhYmY2YjQ2YWYxODQ3N2Y2ZTgzMWE1ZjUwZDE3MjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNlZDE4YzY4ZjZjNzQ2MmNiZWI3MmQ3NDU2Y2JlOGFhMWYyZjQ2MmZjMGFhZDgxMGRmMGNmNTZmNjhjMDMyMWMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUzNGM2OGVhYTEyNWFjNjNiNWU4ZmQ3YTYwMDk5OTE2MzZjYTcxMDdhZmRmMzUzMTgxNjgzOWQ4ZTU3Y2M3N2QiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/medical_triage_mlops/ml/train.py#L15-L54",
+          "version": "repo-lines-v1:sha256:c396b61c770c6e8a10887a32c6b69b1f902999478bf8710de82c93e78651847a:eyJzZWxlY3RlZExpbmVDb3VudCI6NDAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI4MzQ2YTU5MjU5M2U1Njg5MTQ2NTU2ZjFjYzFkMzAyOWI2YzJkZWM4MTBmYTA4NTdiMWZiYzVhMzJjZGFkMmYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAyOWNiMzUzY2IyMmZjNDE2NDUzZWEyZWYwMzRjY2UxMTMxZDM4M2E5YTM4ZDdmZTNmNjVlYTlhMTc5M2M3N2EiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU4MDA2NzRjN2NmNzY0YTEyNzhiMzlmYWEwOWFjMWFiZmEwNTE1ZmQwZmI1NGE4NGNlZGQyNGQ4MmYzMDQ0YzUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZlMGRkODcyMmI5YjA0N2JlODI4NzA0YzJiNmE5YzYxMGViMGE0ZDdiM2FjMDYyMmU3YzkzM2EyYjkwYzgzOTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_49ee2915436848d79f6991a09c8e6a92",
+      "statement": "The medical_triage_training DAG in Apache Airflow automates data ingestion, preprocessing, model training, and ONNX conversion tasks sequentially, persisting model artifacts to shared volume mounts.",
+      "evidence": [
+        {
+          "resource": "repo://airflow/dags/medical_triage_training_dag.py#L56-L69",
+          "version": "repo-lines-v1:sha256:32da4c00524ad6cc2834dc42a595ef6674d4e1c197ac999782e556069a22aee6:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJjOTY2MTc1NzJhMWYzNDVmOGY3YWY0MjY2Nzc3ZWM5ODhiNzg4MzMxNjExMWE0ZWNmMzE4NWY1MDczODZmNWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNiNmY5MmQxM2Y4YzMyOTQ3ZDQwYTZiYjIxYmIzNmRkYTI4NjQ2OTA2YjUyOGM3MWE5NGQ3YTc4NzU5OTk0ZGIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFlZWVhNTk2YzU5OGJhZGFmNjQxNmIyNWFmYTBlMzQzMjZmNzhlYWI5ZjVjZGMzYTkzMDkyZDY5NDU4MWJjOGUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://airflow/docker-compose.yml#L12-L16",
+          "version": "repo-lines-v1:sha256:cf85d4987f3b51253f7d70b15f43526c4fd25889b56aa219610597b7c7fb4129:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiM2FlZDQyMTZjMTZmNjExNWNlZTNmZDhmMGNiZDU0NjRhMWZlZWNlNTM1YzkwNTcxZTJhNjM4ZDdiYmIxZjY0YSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTkwZGM1YzhiOGRhODM2MTJlMjRmNDc4MTk3ODI0ZWIxMTRkODc5YzkwNWJmNTY0MWIxMDBmMmJlNGRmZTYwNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiN2I0ZjAzYmE5OGJhNWUwYjk4MzhmYWNmYTYxODcxNzlkNmQ4YjgwMzNkNjFjMDM4ZWU4MGM5ZWJkNDEyMjNmMSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDAxMjdhZmZlNjhlMWM3MTIyMGI2ZDRjZjc5YTU1NmMzZTQwOTY0YmUwMjdiYTkwNzJjMWRhNTJjYzMxYzU3NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_9dd8275933d1420fb89b107afa784a99",
+      "statement": "PrometheusMiddleware collects HTTP request counts and duration metrics, exposing them on the /metrics endpoint for scraping by Prometheus and visualization in Grafana.",
+      "evidence": [
+        {
+          "resource": "repo://docker-compose.yml#L18-L43",
+          "version": "repo-lines-v1:sha256:94fd20e069bfc54459b56647670c86c825fb043e11ce95c134c47e5cfb861d34:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhODE1NWMzMDVmMGNmYjZmZGJmMDg3NGJmYmU3MDEyZGYyMGY0MDYzYzUzZDZlM2VmOThiYmM0MDFiYjU4YzkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI4OTdlYzNhZGZhYmVkNWQ1OTEzNTFjODQ5MjliMDJiMDJmZDBlMTFlYjI5MzAyOTVhZDVmM2U3MDBiZWMyMjEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI4ZTE5N2YwNGY3Yjg4M2IzZDA2ZDg2ODU4YzIzODdjODUzNDE1YTQ5MWVlYjExYThiNmU0ZWE2NWVmYWFkZGYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAwMTI3YWZmZTY4ZTFjNzEyMjBiNmQ0Y2Y3OWE1NTZjM2U0MDk2NGJlMDI3YmE5MDcyYzFkYTUyY2MzMWM1NzUifQ"
+        },
+        {
+          "resource": "repo://src/medical_triage_mlops/monitoring/metrics.py#L8-L49",
+          "version": "repo-lines-v1:sha256:f1309013c514c5206b8a9689a6f5e6dc570273cce7c25f38fc149874424ea8b2:eyJzZWxlY3RlZExpbmVDb3VudCI6NDIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MGJhMmY0OGExYzRiNmExMTRjZDc0MjBlNDFhMDE5MmZkOGZlZjE2Zjc2OWJjZDJiY2Y0YzllMDQyZDkzZTYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVkZThkYTgyZGJmNGE3NDg2OTRkYWQwZWZiMzhjOGQ0NGZkMDMxZWI1ZDEyZmNhNjMzMjA3Nzk3YjQ3ODQxOGMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRiNDhmMGQyN2FlYmIyODQxMGRjNDg0N2Q0NWVlZGI2ZThmNjIzZDY1NWI4OWM4MWFjYmE4ZWJjMzFjMzQ1YTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_1c883459598a4c3092e6257b895558db",
+      "statement": "The main application uses a multi-stage Dockerfile leveraging uv for dependency installation and runs alongside Prometheus and Grafana services configured in docker-compose.yml.",
+      "evidence": [
+        {
+          "resource": "repo://Dockerfile#L1-L25",
+          "version": "repo-lines-v1:sha256:e8b16ec4b6b977fd4667dccecf508a468bd7ec799c2290e45ad242112170619f:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdhMzUxNWZmZjc5ZjBjM2I4NGYzNmU4ZWY1YmNhMDM4MzkzMTVkMjYwNDFlZTFiMGRiNWIyYzhmZDA2ZjMwNzciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJkNmEwZDU2MWM2MDExZDExMzFkZGE2ODMyZDBmZTdhNmZkNzFiOTJmMjI5YzliYjhlOTA1NzM4NDM3NzlhNTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://docker-compose.yml#L1-L44",
+          "version": "repo-lines-v1:sha256:81f6ea6b0bc8135a66fff7d7de0ead41f8c0e09abbcd43c9ffbc95ed2a49a02f:eyJzZWxlY3RlZExpbmVDb3VudCI6NDQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZjZmVlYWJkODk2ZDhlYzU0OGQzOWI0NzUyNGEzOGFhZDU5MWM3ZGZlMWRhYzQzNGJkYzBhZDIzNzAyZDlmZDgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAwMTI3YWZmZTY4ZTFjNzEyMjBiNmQ0Y2Y3OWE1NTZjM2U0MDk2NGJlMDI3YmE5MDcyYzFkYTUyY2MzMWM1NzUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_5cdd9d0ed1244ca5b74a02ea8826fcb5",
+      "statement": "Data preprocessing maps Kaggle medical abstract condition categories into three urgency levels (urgente, atenção, normal) using CONDITION_TO_URGENCY mappings prior to dataset export.",
+      "evidence": [
+        {
+          "resource": "repo://src/medical_triage_mlops/core/labels.py#L24-L30",
+          "version": "repo-lines-v1:sha256:8101587230c800dadb2fc213c10f4b697e9493b883e1128cd75890bd2cc1dfe5:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZTJjYjVhYWU0N2FmMjhhNmY5NjkzYjY0YWMzNWRjYWUxYTI5ZTNjMTAwZDEzNWQxZGFlMzk3Y2UzNGY2YjBkYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTIyZmFhNTM1YmQyZWEzZDUyZTc0MWVkNDU0NDM1YjdmZTQ5ZTgzNTg2ZTk0M2Q5OGQ4MmJiZmIyNGQxZjVjNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMjgzMjAyMzNmZTcxYmE1NzdhNmYwMzA4NDZiYzJlNDJhNTkwOWE3NzhkYWE1YjBkNjcyZTAxODRlMzE3MDllYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://src/medical_triage_mlops/ml/data.py#L45-L68",
+          "version": "repo-lines-v1:sha256:a6bf5afe42e8e8b50e51579503849a1259d2af439799e38782de8a8851b423b5:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY1ODY5MDcyZGY4Yjk3NTVlZmFkMWEwYjVhZDI1MjA1MTIzM2I2YWEyZDczODljZmUzZTkxYzVkNGQxNDFlNjUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEzZGQ0NTUxZTZjMGJkYzY4YTNhNDVkOTI4N2FlYWIwOGQ3ZDBiNzRlNzFmNGFlZWQ3MjUyOTYzM2Y0YmIyMzUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBiMDJhODM3MGFiNGNhOWQxYjJkMDAzMWViNmFjNjZkOGE3YWQ3YmNlMzQzYTE0N2FjZDFlMjYwY2NjYTQwZTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-24T12:24:27.905Z"
+  }
+}
